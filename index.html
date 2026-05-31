@@ -384,7 +384,7 @@ body { font-family:'Plus Jakarta Sans',sans-serif; background:var(--bg); color:v
         <input type="text" class="input-field flex-1" id="qa-input" placeholder="Type your question about Islam..." autocomplete="off">
         <button class="btn btn-gold" onclick="sendQuestion()"><i class="fas fa-paper-plane"></i></button>
       </div>
-
+<button class="btn btn-outline btn-sm" onclick="testAPIConnection()" style="margin-bottom:8px"><i class="fas fa-wifi"></i>Test AI Connection</button>
       <div class="flex flex-wrap gap-2 mt-4">
         <p class="text-xs w-full mb-1" style="color:var(--text2)">Try asking:</p>
         <button class="badge badge-gold cursor-pointer text-xs" onclick="quickQuestion('What are the five pillars of Islam?')">Five Pillars</button>
@@ -964,7 +964,7 @@ if (menuToggle) {
 // ============================================
 // ISLAMIC Q&A (With Real AI Support)
 // ============================================
-var GROQ_API_KEY = "PASTE_YOUR_KEY_HERE"; // Replace with your actual key
+var GROQ_API_KEY = "gsk_...SiZQ"; // Replace with your actual key
 
 async function testAPIConnection() {
   var container = document.getElementById('chat-container');
