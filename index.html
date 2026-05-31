@@ -961,7 +961,52 @@ if (menuToggle) {
 // ============================================
 // ISLAMIC Q&A (With Real AI Support)
 // ============================================
-var GROQ_API_KEY = "gsk_...SiZQ"; // <-- PASTE YOUR GROQ API KEY HERE
+// ============================================
+// ISLAMIC Q&A (With Real AI Support)
+// ============================================
+var GROQ_API_KEY = "PASTE_YOUR_KEY_HERE"; // Replace with your actual key
+
+async function testAPIConnection() {
+  var container = document.getElementById('chat-container');
+  if (!container) return;
+
+  if (!GROQ_API_KEY || GROQ_API_KEY === "PASTE_YOUR_KEY_HERE" || GROQ_API_KEY.length < 10) {
+    addChatMessage('<strong style="color:var(--danger)">No API Key Found</strong><br>Please paste your Groq API key in the code where it says GROQ_API_KEY. Get a free key at <a href="https://console.groq.com" target="_blank" style="color:var(--gold)">console.groq.com</a>', false);
+    return;
+  }
+
+  addChatMessage('<strong>Testing API connection...</strong>', false);
+
+  try {
+    var response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + GROQ_API_KEY
+      },
+      body: JSON.stringify({
+        model: 'llama-3.1-8b-instant',
+        messages: [
+          { role: 'system', content: 'You are a helpful assistant. Reply in one sentence.' },
+          { role: 'user', content: 'Say hello' }
+        ],
+        max_tokens: 30
+      })
+    });
+
+    var data = await response.json();
+
+    if (response.ok && data.choices && data.choices[0]) {
+      addChatMessage('<strong style="color:var(--success)">Connection Successful!</strong><br>Model: ' + (data.model || 'unknown') + '<br>Response: ' + data.choices[0].message.content + '<br><br>You can now ask any Islamic question!', false);
+    } else {
+      var errMsg = 'Unknown error';
+      if (data.error && data.error.message) errMsg = data.error.message;
+      addChatMessage('<strong style="color:var(--danger)">API Error (Status ' + response.status + ')</strong><br>' + escapeHtml(errMsg) + '<br><br>Check that your API key is correct and active at <a href="https://console.groq.com" target="_blank" style="color:var(--gold)">console.groq.com</a>', false);
+    }
+  } catch (error) {
+    addChatMessage('<strong style="color:var(--danger)">Connection Failed</strong><br>' + escapeHtml(error.message) + '<br><br>This usually means:<br>1. Your internet blocked the request<br>2. You are opening the file locally (file://) — try hosting it<br>3. Browser extension blocking the request', false);
+  }
+}
 
 function addChatMessage(text, isUser) {
   var container = document.getElementById('chat-container');
@@ -1017,44 +1062,70 @@ async function sendQuestion() {
 
   var answer = "";
 
-  if (GROQ_API_KEY && GROQ_API_KEY.length > 10) {
-    // Try Real AI
-    try {
-      var response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + GROQ_API_KEY
-        },
-        body: JSON.stringify({
-          model: 'llama3-8b-8192',
-          messages: [
-            {
-              role: 'system',
-              content: 'You are Hasanah AI, a knowledgeable and respectful Islamic learning assistant. Provide accurate answers based on the Quran and authentic Hadith. If unsure, say so politely. Keep answers concise and well-formatted. Use bullet points or bold text where helpful.'
-            },
-            { role: 'user', content: q }
-          ],
-          temperature: 0.3,
-          max_tokens: 600
-        })
-      });
+  if (GROQ_API_KEY && GROQ_API_KEY !== "PASTE_YOUR_KEY_HERE" && GROQ_API_KEY.length > 10) {
+    // Try Real AI - try multiple models in case one is deprecated
+    var models = ['llama-3.1-8b-instant', 'llama3-8b-8192', 'llama-3.3-70b-versatile'];
+    var success = false;
 
-      if (!response.ok) throw new Error('API status ' + response.status);
-      var data = await response.json();
-      if (data.choices && data.choices[0] && data.choices[0].message) {
-        answer = data.choices[0].message.content;
-      } else {
-        throw new Error('Invalid API response');
+    for (var m = 0; m < models.length; m++) {
+      try {
+        var response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + GROQ_API_KEY
+          },
+          body: JSON.stringify({
+            model: models[m],
+            messages: [
+              {
+                role: 'system',
+                content: 'You are Hasanah AI, a knowledgeable and respectful Islamic learning assistant. Provide accurate answers based on the Quran and authentic Hadith. If unsure, say so politely. Keep answers concise and well-formatted. Use bullet points or bold text where helpful. Always respond in English unless the user asks for Arabic.'
+              },
+              { role: 'user', content: q }
+            ],
+            temperature: 0.3,
+            max_tokens: 800
+          })
+        });
+
+        if (!response.ok) {
+          var errorData = await response.json();
+          // If model not found, try next one
+          if (response.status === 400 || response.status === 404) {
+            console.warn('Model ' + models[m] + ' failed, trying next...');
+            continue;
+          }
+          // Auth error - don't try other models
+          if (response.status === 401 || response.status === 403) {
+            throw new Error('Invalid API Key (Status ' + response.status + '): ' + (errorData.error ? errorData.error.message : 'Check your key'));
+          }
+          throw new Error('API Error ' + response.status + ': ' + (errorData.error ? errorData.error.message : 'Unknown'));
+        }
+
+        var data = await response.json();
+        if (data.choices && data.choices[0] && data.choices[0].message) {
+          answer = data.choices[0].message.content;
+          success = true;
+          break;
+        }
+      } catch (error) {
+        if (m === models.length - 1 || error.message.indexOf('Invalid API Key') !== -1) {
+          console.error('All AI models failed:', error);
+          answer = findLocalAnswer(q);
+          answer += '<br><br><p style="font-size:11px;color:var(--danger)"><i>AI Error: ' + escapeHtml(error.message) + '. Showing offline answer.</i></p>';
+        }
       }
-    } catch (error) {
-      console.error('AI API Error, falling back to local:', error);
+    }
+
+    if (!success && !answer) {
       answer = findLocalAnswer(q);
-      answer += '<br><br><p style="font-size:11px;color:var(--text2)"><i>AI connection issue. Showing offline answer.</i></p>';
+      answer += '<br><br><p style="font-size:11px;color:var(--danger)"><i>All AI models failed. Showing offline answer.</i></p>';
     }
   } else {
     // No API key, use local knowledge base
     answer = findLocalAnswer(q);
+    answer += '<br><br><p style="font-size:11px;color:var(--text2)"><i>Running in offline mode. Add a Groq API key for real AI answers.</i></p>';
   }
 
   // Remove typing and show answer
@@ -1099,7 +1170,7 @@ function findLocalAnswer(question) {
   return "I'm not certain about that specific topic. Could you try rephrasing your question, or ask about core topics like the Five Pillars, Quran, Salah, Ramadan, or Prophets?";
 }
 
-// Enter key listener for Q&A input
+// Enter key listener
 var qaInput = document.getElementById('qa-input');
 if (qaInput) {
   qaInput.addEventListener('keydown', function(e) {
@@ -1107,6 +1178,8 @@ if (qaInput) {
   });
 }
 
+
+  
 // ============================================
 // PRAYER TIMES
 // ============================================
