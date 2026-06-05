@@ -115,6 +115,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 <body>
 
 <!-- Auth Overlay -->
+<!-- Auth Overlay -->
 <div id="auth-overlay">
 <div class="bg-pattern"></div>
 <div class="bg-glow"></div>
@@ -125,27 +126,32 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 <p class="text-xs mt-1" style="color:var(--text2)">Smart Islamic & Academic Assistant</p>
 </div>
 <div class="auth-tabs">
-<button class="auth-tab active" onclick="switchAuthTab('login')">Login</button>
-<button class="auth-tab" onclick="switchAuthTab('register')">Create Account</button>
+<button class="auth-tab active" id="tab-login" type="button">Login</button>
+<button class="auth-tab" id="tab-register" type="button">Create Account</button>
 </div>
 <p class="auth-error" id="auth-error"></p>
-<p class="auth-success" id="auth-success"></p>
 <div class="auth-locked" id="auth-locked"></div>
-<form class="auth-form active" id="login-form" onsubmit="handleLogin(event)">
-<input type="email" class="input-field" id="login-email" placeholder="Email address" required autocomplete="email">
-<input type="password" class="input-field" id="login-password" placeholder="Password" required>
-<button type="submit" class="auth-btn" id="login-btn">Login</button>
+
+<div id="login-panel">
+<div class="flex flex-col gap-14px" style="display:flex;flex-direction:column;gap:14px">
+<input type="email" class="input-field" id="login-email" placeholder="Email address" autocomplete="email">
+<input type="password" class="input-field" id="login-password" placeholder="Password">
+<button class="auth-btn" id="login-btn" type="button">Login</button>
 <p class="text-xs text-center" style="color:var(--text2)">Admin: admin@hasanah.ai / admin123</p>
-</form>
-<form class="auth-form" id="register-form" onsubmit="handleRegister(event)">
-<input type="text" class="input-field" id="reg-name" placeholder="Full name" required autocomplete="name" minlength="2">
-<input type="email" class="input-field" id="reg-email" placeholder="Email address" required autocomplete="email">
-<input type="password" class="input-field" id="reg-password" placeholder="Password (min 8 characters)" required minlength="8" oninput="checkPasswordStrength(this.value)">
+</div>
+</div>
+
+<div id="register-panel" style="display:none">
+<div class="flex flex-col gap-14px" style="display:flex;flex-direction:column;gap:14px">
+<input type="text" class="input-field" id="reg-name" placeholder="Full name" autocomplete="name">
+<input type="email" class="input-field" id="reg-email" placeholder="Email address" autocomplete="email">
+<input type="password" class="input-field" id="reg-password" placeholder="Password (min 8 characters)">
 <div class="pwd-strength"><div class="pwd-strength-fill" id="pwd-fill"></div></div>
 <p class="pwd-label" id="pwd-label" style="color:var(--text2)"></p>
-<input type="password" class="input-field" id="reg-confirm" placeholder="Confirm password" required>
-<button type="submit" class="auth-btn" id="reg-btn">Create Account</button>
-</form>
+<input type="password" class="input-field" id="reg-confirm" placeholder="Confirm password">
+<button class="auth-btn" id="reg-btn" type="button">Create Account</button>
+</div>
+</div>
 </div>
 </div>
 
@@ -289,36 +295,346 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 
 <script>
 // ============================================
-// AUTHENTICATION SYSTEM
+// AUTHENTICATION SYSTEM (Fixed & Robust)
 // ============================================
-async function hashPassword(p){var e=new TextEncoder(),d=e.encode(p+'hasanah_salt_2024'),h=await crypto.subtle.digest('SHA-256',d);return Array.from(new Uint8Array(h)).map(function(b){return b.toString(16).padStart(2,'0')}).join('')}
 
-function getLoginAttempts(){try{return JSON.parse(localStorage.getItem('hasanah_loginAttempts')||'{"count":0,"lockedUntil":0}')}catch(e){return{count:0,lockedUntil:0}}}
-function recordFailedAttempt(){var d=getLoginAttempts();d.count+=1;if(d.count>=5){d.lockedUntil=Date.now()+300000;d.count=0}localStorage.setItem('hasanah_loginAttempts',JSON.stringify(d))}
-function clearLoginAttempts(){localStorage.removeItem('hasanah_loginAttempts')}
-function isAccountLocked(){var d=getLoginAttempts();if(d.lockedUntil&&Date.now()<d.lockedUntil){return Math.ceil((d.lockedUntil-Date.now())/60000)}if(d.lockedUntil&&Date.now()>=d.lockedUntil)clearLoginAttempts();return 0}
+function simpleHash(str) {
+  var hash = 0;
+  var salted = str + 'hasanah_salt_2024_secure';
+  for (var i = 0; i < salted.length; i++) {
+    var ch = salted.charCodeAt(i);
+    hash = ((hash << 5) - hash) + ch;
+    hash = hash & hash;
+  }
+  return 'h_' + Math.abs(hash).toString(16) + '_' + salted.length.toString(16);
+}
 
-var SESSION_DURATION=86400000;
-function createSession(u){var s={userId:u.id,name:u.name,email:u.email,role:u.role,createdAt:Date.now(),expiresAt:Date.now()+SESSION_DURATION};localStorage.setItem('hasanah_session',JSON.stringify(s));return s}
-function getValidSession(){try{var s=JSON.parse(localStorage.getItem('hasanah_session'));if(!s)return null;if(Date.now()>s.expiresAt){localStorage.removeItem('hasanah_session');return null}return s}catch(e){return null}}
+function getLoginAttempts() {
+  try { return JSON.parse(localStorage.getItem('hasanah_loginAttempts') || '{"count":0,"lockedUntil":0}'); }
+  catch(e) { return {count:0, lockedUntil:0}; }
+}
 
-function checkPasswordStrength(pwd){var fill=document.getElementById('pwd-fill'),label=document.getElementById('pwd-label');if(!fill||!label)return;var s=0;if(pwd.length>=8)s++;if(pwd.length>=12)s++;if(/[A-Z]/.test(pwd))s++;if(/[0-9]/.test(pwd))s++;if(/[^A-Za-z0-9]/.test(pwd))s++;var l=[{w:'0%',c:'var(--bg)',t:''},{w:'20%',c:'var(--danger)',t:'Very Weak'},{w:'40%',c:'#E8976A',t:'Weak'},{w:'60%',c:'var(--gold)',t:'Fair'},{w:'80%',c:'var(--emerald)',t:'Strong'},{w:'100%',c:'var(--success)',t:'Very Strong'}];var v=l[s]||l[0];fill.style.width=v.w;fill.style.background=v.c;label.textContent=v.t;label.style.color=v.c}
+function recordFailedAttempt() {
+  var d = getLoginAttempts();
+  d.count += 1;
+  if (d.count >= 5) { d.lockedUntil = Date.now() + 300000; d.count = 0; }
+  localStorage.setItem('hasanah_loginAttempts', JSON.stringify(d));
+}
 
-async function initAuth(){var users=[];try{users=JSON.parse(localStorage.getItem('hasanah_users')||'[]')}catch(e){users=[]}var adminExists=false;for(var i=0;i<users.length;i++){if(users[i].email==='admin@hasanah.ai'){adminExists=true;break}}if(!adminExists){var ah=await hashPassword('admin123');users.push({id:'admin-local',name:'Admin',email:'admin@hasanah.ai',passwordHash:ah,role:'admin',createdAt:new Date().toISOString()});localStorage.setItem('hasanah_users',JSON.stringify(users))}var needsSave=false;for(var i=0;i<users.length;i++){if(users[i].password&&!users[i].passwordHash){users[i].passwordHash=await hashPassword(users[i].password);delete users[i].password;needsSave=true}}if(needsSave)localStorage.setItem('hasanah_users',JSON.stringify(users));var session=getValidSession();if(session)showApp(session);else showAuth()}
+function clearLoginAttempts() { localStorage.removeItem('hasanah_loginAttempts'); }
 
-function switchAuthTab(tab){var tabs=document.querySelectorAll('.auth-tab'),lf=document.getElementById('login-form'),rf=document.getElementById('register-form');hideAuthMessages();if(tab==='login'){tabs[0].classList.add('active');tabs[1].classList.remove('active');lf.classList.add('active');rf.classList.remove('active')}else{tabs[0].classList.remove('active');tabs[1].classList.add('active');lf.classList.remove('active');rf.classList.add('active')}}
-function showAuthError(m){var e=document.getElementById('auth-error');e.textContent=m;e.style.display='block'}
-function showAuthSuccess(m){var e=document.getElementById('auth-success');e.textContent=m;e.style.display='block'}
-function hideAuthMessages(){document.getElementById('auth-error').style.display='none';document.getElementById('auth-success').style.display='none';document.getElementById('auth-locked').style.display='none'}
+function isAccountLocked() {
+  var d = getLoginAttempts();
+  if (d.lockedUntil && Date.now() < d.lockedUntil) return Math.ceil((d.lockedUntil - Date.now()) / 60000);
+  if (d.lockedUntil && Date.now() >= d.lockedUntil) clearLoginAttempts();
+  return 0;
+}
 
-async function handleLogin(e){e.preventDefault();hideAuthMessages();var lockMin=isAccountLocked();if(lockMin>0){var le=document.getElementById('auth-locked');le.innerHTML='<i class="fas fa-lock"></i> Too many failed attempts. Try again in '+lockMin+' minute'+(lockMin>1?'s':'')+'.';le.style.display='block';return}var email=document.getElementById('login-email').value.trim(),password=document.getElementById('login-password').value,btn=document.getElementById('login-btn');btn.disabled=true;btn.textContent='Verifying...';var inputHash=await hashPassword(password),users=[];try{users=JSON.parse(localStorage.getItem('hasanah_users')||'[]')}catch(e){users=[]}var matched=null;for(var i=0;i<users.length;i++){var sh=users[i].passwordHash||'';if(users[i].email===email&&sh===inputHash){matched=users[i];break}}if(matched){clearLoginAttempts();var session=createSession(matched);showApp(session);showToast('Welcome back, '+matched.name+'!','success')}else{recordFailedAttempt();var att=getLoginAttempts(),rem=5-att.count;showAuthError('Invalid email or password. '+rem+' attempt'+(rem!==1?'s':'')+' remaining.')}btn.disabled=false;btn.textContent='Login'}
+var SESSION_DURATION = 86400000;
 
-async function handleRegister(e){e.preventDefault();hideAuthMessages();var name=document.getElementById('reg-name').value.trim(),email=document.getElementById('reg-email').value.trim(),password=document.getElementById('reg-password').value,confirm=document.getElementById('reg-confirm').value;if(name.length<2){showAuthError('Name must be at least 2 characters.');return}if(password.length<8){showAuthError('Password must be at least 8 characters.');return}if(password!==confirm){showAuthError('Passwords do not match.');return}var s=0;if(password.length>=8)s++;if(password.length>=12)s++;if(/[A-Z]/.test(password))s++;if(/[0-9]/.test(password))s++;if(/[^A-Za-z0-9]/.test(password))s++;if(s<3){showAuthError('Password too weak. Add uppercase, numbers, or symbols.');return}var users=[];try{users=JSON.parse(localStorage.getItem('hasanah_users')||'[]')}catch(e){users=[]}for(var i=0;i<users.length;i++){if(users[i].email===email){showAuthError('An account with this email already exists.');return}}var btn=document.getElementById('reg-btn');btn.disabled=true;btn.textContent='Creating...';var ph=await hashPassword(password),newUser={id:'user-'+Date.now(),name:name,email:email,passwordHash:ph,role:'student',createdAt:new Date().toISOString()};users.push(newUser);localStorage.setItem('hasanah_users',JSON.stringify(users));var session=createSession(newUser);showApp(session);showToast('Account created! Welcome, '+name,'success');btn.disabled=false;btn.textContent='Create Account'}
+function createSession(u) {
+  var s = { userId: u.id, name: u.name, email: u.email, role: u.role, createdAt: Date.now(), expiresAt: Date.now() + SESSION_DURATION };
+  localStorage.setItem('hasanah_session', JSON.stringify(s));
+  return s;
+}
 
-function handleLogout(){localStorage.removeItem('hasanah_session');showAuth();showToast('Logged out successfully','info')}
-function showApp(user){var o=document.getElementById('auth-overlay');if(o)o.classList.add('hidden');var ne=document.getElementById('sidebar-username');if(ne)ne.textContent=user.name;var ee=document.getElementById('sidebar-email');if(ee)ee.textContent=user.email;var ge=document.querySelector('#page-dashboard p.text-sm');if(ge){var h=new Date().getHours(),tg=h<12?'Good Morning':h<17?'Good Afternoon':'Good Evening';ge.textContent=tg+', '+user.name.split(' ')[0]+'!'}}
-function showAuth(){var o=document.getElementById('auth-overlay');if(o)o.classList.remove('hidden');var lf=document.getElementById('login-form');if(lf)lf.reset();var rf=document.getElementById('register-form');if(rf)rf.reset();hideAuthMessages();switchAuthTab('login')}
+function getValidSession() {
+  try {
+    var s = JSON.parse(localStorage.getItem('hasanah_session'));
+    if (!s) return null;
+    if (Date.now() > s.expiresAt) { localStorage.removeItem('hasanah_session'); return null; }
+    return s;
+  } catch(e) { return null; }
+}
 
+function checkPasswordStrength(pwd) {
+  var fill = document.getElementById('pwd-fill');
+  var label = document.getElementById('pwd-label');
+  if (!fill || !label) return;
+  var s = 0;
+  if (pwd.length >= 8) s++;
+  if (pwd.length >= 12) s++;
+  if (/[A-Z]/.test(pwd)) s++;
+  if (/[0-9]/.test(pwd)) s++;
+  if (/[^A-Za-z0-9]/.test(pwd)) s++;
+  var levels = [
+    {w:'0%', c:'var(--bg)', t:''},
+    {w:'20%', c:'var(--danger)', t:'Very Weak'},
+    {w:'40%', c:'#E8976A', t:'Weak'},
+    {w:'60%', c:'var(--gold)', t:'Fair'},
+    {w:'80%', c:'var(--emerald)', t:'Strong'},
+    {w:'100%', c:'var(--success)', t:'Very Strong'}
+  ];
+  var v = levels[s] || levels[0];
+  fill.style.width = v.w;
+  fill.style.background = v.c;
+  label.textContent = v.t;
+  label.style.color = v.c;
+}
+
+function initAuth() {
+  // Seed admin account
+  var users = [];
+  try { users = JSON.parse(localStorage.getItem('hasanah_users') || '[]'); } catch(e) { users = []; }
+
+  var adminExists = false;
+  for (var i = 0; i < users.length; i++) {
+    if (users[i].email === 'admin@hasanah.ai') { adminExists = true; break; }
+  }
+
+  if (!adminExists) {
+    users.push({
+      id: 'admin-local',
+      name: 'Admin',
+      email: 'admin@hasanah.ai',
+      passwordHash: simpleHash('admin123'),
+      role: 'admin',
+      createdAt: new Date().toISOString()
+    });
+    localStorage.setItem('hasanah_users', JSON.stringify(users));
+  }
+
+  // Migrate old plain-text passwords
+  var needsSave = false;
+  for (var i = 0; i < users.length; i++) {
+    if (users[i].password && !users[i].passwordHash) {
+      users[i].passwordHash = simpleHash(users[i].password);
+      delete users[i].password;
+      needsSave = true;
+    }
+  }
+  if (needsSave) localStorage.setItem('hasanah_users', JSON.stringify(users));
+
+  // Setup tab click handlers
+  var tabLogin = document.getElementById('tab-login');
+  var tabRegister = document.getElementById('tab-register');
+  if (tabLogin) {
+    tabLogin.addEventListener('click', function() {
+      this.classList.add('active');
+      var other = document.getElementById('tab-register');
+      if (other) other.classList.remove('active');
+      document.getElementById('login-panel').style.display = 'block';
+      document.getElementById('register-panel').style.display = 'none';
+      hideAuthMessages();
+    });
+  }
+  if (tabRegister) {
+    tabRegister.addEventListener('click', function() {
+      this.classList.add('active');
+      var other = document.getElementById('tab-login');
+      if (other) other.classList.remove('active');
+      document.getElementById('register-panel').style.display = 'block';
+      document.getElementById('login-panel').style.display = 'none';
+      hideAuthMessages();
+    });
+  }
+
+  // Setup button click handlers (NOT form onsubmit)
+  var loginBtn = document.getElementById('login-btn');
+  if (loginBtn) loginBtn.addEventListener('click', handleLogin);
+
+  var regBtn = document.getElementById('reg-btn');
+  if (regBtn) regBtn.addEventListener('click', handleRegister);
+
+  // Enter key on login fields
+  var loginEmail = document.getElementById('login-email');
+  var loginPass = document.getElementById('login-password');
+  if (loginEmail) loginEmail.addEventListener('keydown', function(e) { if (e.key === 'Enter') handleLogin(); });
+  if (loginPass) loginPass.addEventListener('keydown', function(e) { if (e.key === 'Enter') handleLogin(); });
+
+  var regPass = document.getElementById('reg-password');
+  if (regPass) regPass.addEventListener('input', function() { checkPasswordStrength(this.value); });
+
+  // Check existing session
+  var session = getValidSession();
+  if (session) {
+    showApp(session);
+  } else {
+    showAuth();
+  }
+}
+
+function hideAuthMessages() {
+  document.getElementById('auth-error').style.display = 'none';
+  document.getElementById('auth-locked').style.display = 'none';
+}
+
+function showAuthError(m) {
+  var e = document.getElementById('auth-error');
+  e.textContent = m;
+  e.style.display = 'block';
+}
+
+function handleLogin() {
+  hideAuthMessages();
+
+  var lockMin = isAccountLocked();
+  if (lockMin > 0) {
+    var le = document.getElementById('auth-locked');
+    le.innerHTML = '<i class="fas fa-lock"></i> Too many failed attempts. Try again in ' + lockMin + ' minute' + (lockMin > 1 ? 's' : '') + '.';
+    le.style.display = 'block';
+    return;
+  }
+
+  var email = document.getElementById('login-email').value.trim();
+  var password = document.getElementById('login-password').value;
+
+  if (!email || !password) {
+    showAuthError('Please enter both email and password.');
+    return;
+  }
+
+  var btn = document.getElementById('login-btn');
+  btn.disabled = true;
+  btn.textContent = 'Verifying...';
+
+  // Use setTimeout to allow UI to update
+  setTimeout(function() {
+    try {
+      var inputHash = simpleHash(password);
+      var users = [];
+      try { users = JSON.parse(localStorage.getItem('hasanah_users') || '[]'); } catch(e) { users = []; }
+
+      var matched = null;
+      for (var i = 0; i < users.length; i++) {
+        if (users[i].email === email && users[i].passwordHash === inputHash) {
+          matched = users[i];
+          break;
+        }
+      }
+
+      if (matched) {
+        clearLoginAttempts();
+        var session = createSession(matched);
+        showApp(session);
+        showToast('Welcome back, ' + matched.name + '!', 'success');
+      } else {
+        recordFailedAttempt();
+        var att = getLoginAttempts();
+        var rem = 5 - att.count;
+        showAuthError('Invalid email or password. ' + rem + ' attempt' + (rem !== 1 ? 's' : '') + ' remaining.');
+      }
+    } catch(err) {
+      showAuthError('Login error: ' + err.message);
+    }
+
+    btn.disabled = false;
+    btn.textContent = 'Login';
+  }, 100);
+}
+
+function handleRegister() {
+  hideAuthMessages();
+
+  var name = document.getElementById('reg-name').value.trim();
+  var email = document.getElementById('reg-email').value.trim();
+  var password = document.getElementById('reg-password').value;
+  var confirm = document.getElementById('reg-confirm').value;
+
+  if (!name || name.length < 2) { showAuthError('Name must be at least 2 characters.'); return; }
+  if (!email) { showAuthError('Please enter an email address.'); return; }
+  if (password.length < 8) { showAuthError('Password must be at least 8 characters.'); return; }
+  if (password !== confirm) { showAuthError('Passwords do not match.'); return; }
+
+  var s = 0;
+  if (password.length >= 8) s++;
+  if (password.length >= 12) s++;
+  if (/[A-Z]/.test(password)) s++;
+  if (/[0-9]/.test(password)) s++;
+  if (/[^A-Za-z0-9]/.test(pwd)) s++;
+  if (s < 3) { showAuthError('Password too weak. Add uppercase, numbers, or symbols.'); return; }
+
+  var btn = document.getElementById('reg-btn');
+  btn.disabled = true;
+  btn.textContent = 'Creating...';
+
+  setTimeout(function() {
+    try {
+      var users = [];
+      try { users = JSON.parse(localStorage.getItem('hasanah_users') || '[]'); } catch(e) { users = []; }
+
+      for (var i = 0; i < users.length; i++) {
+        if (users[i].email === email) {
+          showAuthError('An account with this email already exists.');
+          btn.disabled = false;
+          btn.textContent = 'Create Account';
+          return;
+        }
+      }
+
+      var newUser = {
+        id: 'user-' + Date.now(),
+        name: name,
+        email: email,
+        passwordHash: simpleHash(password),
+        role: 'student',
+        createdAt: new Date().toISOString()
+      };
+
+      users.push(newUser);
+      localStorage.setItem('hasanah_users', JSON.stringify(users));
+
+      var session = createSession(newUser);
+      showApp(session);
+      showToast('Account created! Welcome, ' + name, 'success');
+    } catch(err) {
+      showAuthError('Registration error: ' + err.message);
+    }
+
+    btn.disabled = false;
+    btn.textContent = 'Create Account';
+  }, 100);
+}
+
+function handleLogout() {
+  localStorage.removeItem('hasanah_session');
+  showAuth();
+  showToast('Logged out successfully', 'info');
+}
+
+function showApp(user) {
+  var overlay = document.getElementById('auth-overlay');
+  if (overlay) {
+    overlay.style.opacity = '0';
+    overlay.style.pointerEvents = 'none';
+  }
+
+  var nameEl = document.getElementById('sidebar-username');
+  if (nameEl) nameEl.textContent = user.name;
+  var emailEl = document.getElementById('sidebar-email');
+  if (emailEl) emailEl.textContent = user.email;
+
+  // Update dashboard greeting
+  try {
+    var greetingEl = document.querySelector('#page-dashboard h2');
+    if (greetingEl) {
+      var hour = new Date().getHours();
+      var tg = hour < 12 ? 'Good Morning' : hour < 17 ? 'Good Afternoon' : 'Good Evening';
+      greetingEl.innerHTML = tg + ', <span style="color:var(--gold)">' + user.name.split(' ')[0] + '</span>';
+    }
+  } catch(e) {}
+}
+
+function showAuth() {
+  var overlay = document.getElementById('auth-overlay');
+  if (overlay) {
+    overlay.style.opacity = '1';
+    overlay.style.pointerEvents = 'auto';
+  }
+  hideAuthMessages();
+  // Reset to login tab
+  var tabLogin = document.getElementById('tab-login');
+  var tabRegister = document.getElementById('tab-register');
+  if (tabLogin) tabLogin.classList.add('active');
+  if (tabRegister) tabRegister.classList.remove('active');
+  document.getElementById('login-panel').style.display = 'block';
+  document.getElementById('register-panel').style.display = 'none';
+  // Clear fields
+  var le = document.getElementById('login-email');
+  var lp = document.getElementById('login-password');
+  if (le) le.value = '';
+  if (lp) lp.value = '';
+}
 // ============================================
 // KNOWLEDGE BASE (Offline Fallback)
 // ============================================
