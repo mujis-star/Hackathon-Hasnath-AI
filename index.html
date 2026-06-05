@@ -12,14 +12,11 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
 .arabic-font{font-family:'Amiri',serif}
-::-webkit-scrollbar{width:6px}
-::-webkit-scrollbar-track{background:var(--bg2)}
-::-webkit-scrollbar-thumb{background:var(--emerald);border-radius:3px}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--bg2)}::-webkit-scrollbar-thumb{background:var(--emerald);border-radius:3px}
 .bg-pattern{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.025;background-image:repeating-linear-gradient(0deg,var(--gold) 0 1px,transparent 1px 60px),repeating-linear-gradient(90deg,var(--gold) 0 1px,transparent 1px 60px)}
 .bg-glow{position:fixed;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(45,155,114,0.08) 0%,transparent 70%);z-index:0;pointer-events:none}
 .bg-glow2{position:fixed;bottom:-200px;left:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(212,168,83,0.06) 0%,transparent 70%);z-index:0;pointer-events:none}
 #sidebar{position:fixed;left:0;top:0;bottom:0;width:260px;background:var(--bg2);border-right:1px solid var(--border);z-index:50;transition:transform 0.3s ease;display:flex;flex-direction:column}
-#sidebar.open{transform:translateX(0)}
 .nav-item{display:flex;align-items:center;gap:12px;padding:12px 20px;margin:2px 12px;border-radius:10px;cursor:pointer;transition:all 0.2s;color:var(--text2);font-size:14px;font-weight:500}
 .nav-item:hover{background:var(--gold-dim);color:var(--text)}
 .nav-item.active{background:linear-gradient(135deg,rgba(45,155,114,0.2),rgba(212,168,83,0.15));color:var(--gold)}
@@ -45,7 +42,6 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .btn-emerald:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(45,155,114,0.3)}
 .btn-outline{background:transparent;border:1px solid var(--border);color:var(--text2)}
 .btn-outline:hover{border-color:var(--gold);color:var(--gold)}
-.btn-danger{background:var(--danger);color:#fff}
 .btn-sm{padding:6px 14px;font-size:12px;border-radius:8px}
 .badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600}
 .badge-gold{background:var(--gold-dim);color:var(--gold)}
@@ -69,7 +65,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .toast-info{background:linear-gradient(135deg,#1a2a3a,#1e3345);border:1px solid rgba(96,165,250,0.2);color:#60A5FA}
 .toast-warning{background:linear-gradient(135deg,#3a2a1a,#45331e);border:1px solid rgba(212,168,83,0.2);color:var(--gold)}
 @keyframes toastIn{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:translateX(0)}}
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:100;display:none;align-items:center;justify-content:center;animation:fadeIn 0.2s}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:100;display:none;align-items:center;justify-content:center}
 .modal-overlay.show{display:flex}
 .modal-box{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:32px;width:90%;max-width:480px;animation:fadeIn 0.3s ease}
 .particle{position:fixed;width:3px;height:3px;background:var(--gold);border-radius:50%;opacity:0;z-index:0;pointer-events:none;animation:particleFloat 8s infinite}
@@ -99,22 +95,18 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .auth-tabs{display:flex;gap:0;margin-bottom:24px;border-radius:10px;overflow:hidden;border:1px solid var(--border)}
 .auth-tab{flex:1;padding:12px;text-align:center;cursor:pointer;font-size:14px;font-weight:600;background:var(--bg2);color:var(--text2);transition:all 0.2s;border:none;font-family:inherit}
 .auth-tab.active{background:var(--gold-dim);color:var(--gold)}
-.auth-form{display:none;flex-direction:column;gap:14px}
-.auth-form.active{display:flex}
 .auth-btn{width:100%;padding:14px;border-radius:12px;border:none;font-size:15px;font-weight:700;cursor:pointer;transition:all 0.2s;font-family:inherit;background:linear-gradient(135deg,var(--emerald),var(--gold));color:#070E0B}
 .auth-btn:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(212,168,83,0.25)}
 .auth-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none;box-shadow:none}
 .auth-error{font-size:12px;color:var(--danger);display:none;text-align:center;padding:8px;border-radius:8px;background:rgba(232,93,93,0.08)}
-.auth-success{font-size:12px;color:var(--success);display:none;text-align:center;padding:8px;border-radius:8px;background:rgba(74,222,128,0.08)}
+.auth-locked{font-size:12px;color:var(--danger);text-align:center;display:none;padding:10px;background:rgba(232,93,93,0.08);border-radius:8px}
 .pwd-strength{height:4px;border-radius:2px;background:var(--bg);margin-top:-8px;overflow:hidden}
 .pwd-strength-fill{height:100%;border-radius:2px;transition:width 0.3s,background 0.3s;width:0%}
 .pwd-label{font-size:10px;margin-top:-6px}
-.auth-locked{font-size:12px;color:var(--danger);text-align:center;display:none;padding:10px;background:rgba(232,93,93,0.08);border-radius:8px}
 </style>
 </head>
 <body>
 
-<!-- Auth Overlay -->
 <!-- Auth Overlay -->
 <div id="auth-overlay">
 <div class="bg-pattern"></div>
@@ -131,18 +123,13 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 </div>
 <p class="auth-error" id="auth-error"></p>
 <div class="auth-locked" id="auth-locked"></div>
-
-<div id="login-panel">
-<div class="flex flex-col gap-14px" style="display:flex;flex-direction:column;gap:14px">
+<div id="login-panel" style="display:flex;flex-direction:column;gap:14px">
 <input type="email" class="input-field" id="login-email" placeholder="Email address" autocomplete="email">
 <input type="password" class="input-field" id="login-password" placeholder="Password">
 <button class="auth-btn" id="login-btn" type="button">Login</button>
 <p class="text-xs text-center" style="color:var(--text2)">Admin: admin@hasanah.ai / admin123</p>
 </div>
-</div>
-
-<div id="register-panel" style="display:none">
-<div class="flex flex-col gap-14px" style="display:flex;flex-direction:column;gap:14px">
+<div id="register-panel" style="display:none;flex-direction:column;gap:14px">
 <input type="text" class="input-field" id="reg-name" placeholder="Full name" autocomplete="name">
 <input type="email" class="input-field" id="reg-email" placeholder="Email address" autocomplete="email">
 <input type="password" class="input-field" id="reg-password" placeholder="Password (min 8 characters)">
@@ -153,15 +140,12 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 </div>
 </div>
 </div>
-</div>
 
 <!-- Background Effects -->
 <div class="bg-pattern"></div>
 <div class="bg-glow"></div>
 <div class="bg-glow2"></div>
 <div id="particles"></div>
-
-<!-- Mobile Menu Toggle -->
 <button id="menu-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
 
 <!-- Sidebar -->
@@ -199,15 +183,10 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 
 <!-- Main Content -->
 <div id="main">
-
 <!-- Dashboard -->
 <section id="page-dashboard" class="page active">
 <div class="max-w-6xl mx-auto">
-<div class="mb-8">
-<p class="text-sm mb-1" style="color:var(--text2)">Assalamu Alaikum</p>
-<h2 class="text-3xl font-bold mb-1">Welcome to <span style="color:var(--gold)">Hasanah AI</span></h2>
-<p class="text-sm" style="color:var(--text2)" id="dashboard-date"></p>
-</div>
+<div class="mb-8"><p class="text-sm mb-1" style="color:var(--text2)">Assalamu Alaikum</p><h2 class="text-3xl font-bold mb-1" id="greeting-text">Welcome to <span style="color:var(--gold)">Hasanah AI</span></h2><p class="text-sm" style="color:var(--text2)" id="dashboard-date"></p></div>
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
 <div class="card stat-card"><div class="flex items-center gap-3 mb-3"><div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background:rgba(45,155,114,0.15)"><i class="fas fa-mosque" style="color:var(--emerald)"></i></div><p class="text-xs font-medium" style="color:var(--text2)">Next Prayer</p></div><p class="text-2xl font-bold" id="next-prayer-name">--</p><p class="text-xs mt-1" style="color:var(--gold)" id="next-prayer-time">--</p></div>
 <div class="card stat-card"><div class="flex items-center gap-3 mb-3"><div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background:var(--gold-dim)"><i class="fas fa-book-open" style="color:var(--gold)"></i></div><p class="text-xs font-medium" style="color:var(--text2)">Study Streak</p></div><p class="text-2xl font-bold" id="study-streak">0 days</p><p class="text-xs mt-1" style="color:var(--emerald-light)">Keep it up!</p></div>
@@ -230,7 +209,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 <div class="mb-6"><h2 class="text-2xl font-bold mb-1">Islamic Q&A Assistant</h2><p class="text-sm" style="color:var(--text2)">Ask anything about Islam — powered by real AI.</p></div>
 <div class="card mb-4" style="padding:0;overflow:hidden"><div class="chat-container" id="chat-container"><div class="chat-msg chat-ai"><p>Assalamu Alaikum! I'm your Islamic learning assistant. Ask me about <span style="color:var(--gold)">anything</span> — Salah, Quran, Fiqh, Islamic history, modern issues, and more.</p></div></div></div>
 <div class="flex gap-3"><input type="text" class="input-field flex-1" id="qa-input" placeholder="Type your question about Islam..." autocomplete="off"><button class="btn btn-gold" onclick="sendQuestion()"><i class="fas fa-paper-plane"></i></button></div>
-<div class="flex flex-wrap gap-2 mt-4"><p class="text-xs w-full mb-1" style="color:var(--text2)">Try asking:</p><button class="badge badge-gold cursor-pointer text-xs" onclick="quickQuestion('What are the five pillars of Islam?')">Five Pillars</button><button class="badge badge-gold cursor-pointer text-xs" onclick="quickQuestion('What is the Islamic view on cryptocurrency?')">Cryptocurrency</button><button class="badge badge-gold cursor-pointer text-xs" onclick="quickQuestion('What are the rights of women in Islam?')">Women's Rights</button><button class="badge badge-gold cursor-pointer text-xs" onclick="quickQuestion('How did Islam contribute to science?')">Islamic Science</button><button class="badge badge-gold cursor-pointer text-xs" onclick="quickQuestion('What is the difference between Hadith Qudsi and regular Hadith?')">Hadith Types</button><button class="badge badge-gold cursor-pointer text-xs" onclick="quickQuestion('Is it haram to celebrate birthdays?')">Birthdays</button></div>
+<div class="flex flex-wrap gap-2 mt-4"><p class="text-xs w-full mb-1" style="color:var(--text2)">Try asking:</p><button class="badge badge-gold cursor-pointer text-xs" onclick="quickQuestion('What are the five pillars of Islam?')">Five Pillars</button><button class="badge badge-gold cursor-pointer text-xs" onclick="quickQuestion('What is the Islamic view on cryptocurrency?')">Cryptocurrency</button><button class="badge badge-gold cursor-pointer text-xs" onclick="quickQuestion('What are the rights of women in Islam?')">Women's Rights</button><button class="badge badge-gold cursor-pointer text-xs" onclick="quickQuestion('How did Islam contribute to science?')">Islamic Science</button><button class="badge badge-gold cursor-pointer text-xs" onclick="quickQuestion('Is it haram to celebrate birthdays?')">Birthdays</button></div>
 </div>
 </section>
 
@@ -268,7 +247,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 <div class="max-w-3xl mx-auto">
 <div class="mb-6"><h2 class="text-2xl font-bold mb-1">AI-Generated Islamic Quiz</h2><p class="text-sm" style="color:var(--text2)">Dynamically generated questions — different every time.</p></div>
 <div id="quiz-start" class="card text-center py-12"><i class="fas fa-brain text-5xl mb-4" style="color:var(--gold)"></i><h3 class="text-xl font-bold mb-2">Ready to Test Your Knowledge?</h3><p class="text-sm mb-6" style="color:var(--text2)">Choose category and difficulty to begin.</p><div class="flex flex-wrap justify-center gap-3 mb-6"><select class="input-field" style="max-width:200px" id="quiz-category"><option value="all">All Categories</option><option value="quran">Quran</option><option value="prophet">Prophets & Seerah</option><option value="pillars">Pillars of Islam</option><option value="history">Islamic History</option><option value="fiqh">Fiqh & Worship</option></select><select class="input-field" style="max-width:160px" id="quiz-difficulty"><option value="easy">Easy</option><option value="medium">Medium</option><option value="hard">Hard</option></select></div><button class="btn btn-gold" onclick="startQuiz()"><i class="fas fa-play"></i>Start Quiz</button></div>
-<div id="quiz-active" style="display:none"><div class="card mb-4"><div class="flex items-center justify-between mb-4"><span class="badge badge-gold" id="quiz-progress">Question 1/10</span><span class="text-sm font-semibold" style="color:var(--gold)" id="quiz-score-live">Score: 0</span></div><div class="progress-bar mb-6"><div class="progress-fill" id="quiz-progress-bar" style="width:10%"></div></div><h3 class="text-lg font-semibold mb-6" id="quiz-question"></h3><div class="flex flex-col gap-3" id="quiz-options"></div></div><div class="flex justify-end"><button class="btn btn-gold" id="quiz-next-btn" onclick="nextQuestion()" style="display:none"><i class="fas fa-arrow-right"></i>Next</button></div></div>
+<div id="quiz-active" style="display:none"></div>
 <div id="quiz-result" style="display:none" class="card text-center py-12"><i class="fas fa-trophy text-5xl mb-4" style="color:var(--gold)"></i><h3 class="text-2xl font-bold mb-2">Quiz Complete!</h3><p class="text-4xl font-bold mb-2" style="color:var(--emerald)" id="quiz-final-score">0/10</p><p class="text-sm mb-2" style="color:var(--text2)" id="quiz-percent">0%</p><p class="text-sm mb-6" style="color:var(--gold)" id="quiz-message"></p><button class="btn btn-gold" onclick="resetQuiz()"><i class="fas fa-redo"></i>Take Another Quiz</button></div>
 </div>
 </section>
@@ -287,381 +266,137 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 </div>
 
 <!-- Modals -->
-<div class="modal-overlay" id="planner-modal"><div class="modal-box"><h3 class="text-lg font-bold mb-4">Add Study Session</h3><div class="flex flex-col gap-3"><input type="text" class="input-field" id="plan-subject" placeholder="Subject (e.g., Quran Studies)"><input type="text" class="input-field" id="plan-topic" placeholder="Topic (e.g., Surah Al-Baqarah)"><div class="grid grid-cols-2 gap-3"><input type="date" class="input-field" id="plan-date"><input type="time" class="input-field" id="plan-time"></div><select class="input-field" id="plan-duration"><option value="30">30 minutes</option><option value="45">45 minutes</option><option value="60" selected>1 hour</option><option value="90">1.5 hours</option><option value="120">2 hours</option></select><div class="flex gap-3 mt-2"><button class="btn btn-gold flex-1" onclick="addStudySession()">Add Session</button><button class="btn btn-outline flex-1" onclick="closeModal('planner-modal')">Cancel</button></div></div></div></div>
-
-<div class="modal-overlay" id="assignment-modal"><div class="modal-box"><h3 class="text-lg font-bold mb-4">Add Assignment</h3><div class="flex flex-col gap-3"><input type="text" class="input-field" id="asg-title" placeholder="Assignment title"><input type="text" class="input-field" id="asg-course" placeholder="Course name"><input type="date" class="input-field" id="asg-due"><select class="input-field" id="asg-priority"><option value="low">Low Priority</option><option value="medium" selected>Medium Priority</option><option value="high">High Priority</option></select><textarea class="input-field" id="asg-notes" placeholder="Notes (optional)" rows="2"></textarea><div class="flex gap-3 mt-2"><button class="btn btn-gold flex-1" onclick="addAssignment()">Add Assignment</button><button class="btn btn-outline flex-1" onclick="closeModal('assignment-modal')">Cancel</button></div></div></div></div>
-
+<div class="modal-overlay" id="planner-modal"><div class="modal-box"><h3 class="text-lg font-bold mb-4">Add Study Session</h3><div style="display:flex;flex-direction:column;gap:14px"><input type="text" class="input-field" id="plan-subject" placeholder="Subject (e.g., Quran Studies)"><input type="text" class="input-field" id="plan-topic" placeholder="Topic"><div class="grid grid-cols-2 gap-3"><input type="date" class="input-field" id="plan-date"><input type="time" class="input-field" id="plan-time"></div><select class="input-field" id="plan-duration"><option value="30">30 minutes</option><option value="45">45 minutes</option><option value="60" selected>1 hour</option><option value="90">1.5 hours</option><option value="120">2 hours</option></select><div class="flex gap-3"><button class="btn btn-gold flex-1" onclick="addStudySession()">Add Session</button><button class="btn btn-outline flex-1" onclick="closeModal('planner-modal')">Cancel</button></div></div></div></div>
+<div class="modal-overlay" id="assignment-modal"><div class="modal-box"><h3 class="text-lg font-bold mb-4">Add Assignment</h3><div style="display:flex;flex-direction:column;gap:14px"><input type="text" class="input-field" id="asg-title" placeholder="Assignment title"><input type="text" class="input-field" id="asg-course" placeholder="Course name"><input type="date" class="input-field" id="asg-due"><select class="input-field" id="asg-priority"><option value="low">Low Priority</option><option value="medium" selected>Medium Priority</option><option value="high">High Priority</option></select><textarea class="input-field" id="asg-notes" placeholder="Notes (optional)" rows="2"></textarea><div class="flex gap-3"><button class="btn btn-gold flex-1" onclick="addAssignment()">Add Assignment</button><button class="btn btn-outline flex-1" onclick="closeModal('assignment-modal')">Cancel</button></div></div></div></div>
 <div id="toast-container"></div>
 
 <script>
 // ============================================
-// AUTHENTICATION SYSTEM (Fixed & Robust)
+// AUTHENTICATION SYSTEM
 // ============================================
+function simpleHash(str){var hash=0;var s=str+'hasanah_salt_2024_secure';for(var i=0;i<s.length;i++){hash=((hash<<5)-hash)+s.charCodeAt(i);hash=hash&hash}return 'h_'+Math.abs(hash).toString(16)+'_'+s.length.toString(16)}
 
-function simpleHash(str) {
-  var hash = 0;
-  var salted = str + 'hasanah_salt_2024_secure';
-  for (var i = 0; i < salted.length; i++) {
-    var ch = salted.charCodeAt(i);
-    hash = ((hash << 5) - hash) + ch;
-    hash = hash & hash;
-  }
-  return 'h_' + Math.abs(hash).toString(16) + '_' + salted.length.toString(16);
+function getLoginAttempts(){try{return JSON.parse(localStorage.getItem('hasanah_loginAttempts')||'{"count":0,"lockedUntil":0}')}catch(e){return{count:0,lockedUntil:0}}}
+function recordFailedAttempt(){var d=getLoginAttempts();d.count+=1;if(d.count>=5){d.lockedUntil=Date.now()+300000;d.count=0}localStorage.setItem('hasanah_loginAttempts',JSON.stringify(d))}
+function clearLoginAttempts(){localStorage.removeItem('hasanah_loginAttempts')}
+function isAccountLocked(){var d=getLoginAttempts();if(d.lockedUntil&&Date.now()<d.lockedUntil)return Math.ceil((d.lockedUntil-Date.now())/60000);if(d.lockedUntil&&Date.now()>=d.lockedUntil)clearLoginAttempts();return 0}
+
+var SESSION_DURATION=86400000;
+function createSession(u){var s={userId:u.id,name:u.name,email:u.email,role:u.role,createdAt:Date.now(),expiresAt:Date.now()+SESSION_DURATION};localStorage.setItem('hasanah_session',JSON.stringify(s));return s}
+function getValidSession(){try{var s=JSON.parse(localStorage.getItem('hasanah_session'));if(!s)return null;if(Date.now()>s.expiresAt){localStorage.removeItem('hasanah_session');return null}return s}catch(e){return null}}
+
+function checkPasswordStrength(pwd){var fill=document.getElementById('pwd-fill'),label=document.getElementById('pwd-label');if(!fill||!label)return;var s=0;if(pwd.length>=8)s++;if(pwd.length>=12)s++;if(/[A-Z]/.test(pwd))s++;if(/[0-9]/.test(pwd))s++;if(/[^A-Za-z0-9]/.test(pwd))s++;var l=[{w:'0%',c:'var(--bg)',t:''},{w:'20%',c:'var(--danger)',t:'Very Weak'},{w:'40%',c:'#E8976A',t:'Weak'},{w:'60%',c:'var(--gold)',t:'Fair'},{w:'80%',c:'var(--emerald)',t:'Strong'},{w:'100%',c:'var(--success)',t:'Very Strong'}];var v=l[s]||l[0];fill.style.width=v.w;fill.style.background=v.c;label.textContent=v.t;label.style.color=v.c}
+
+function hideAuthMessages(){document.getElementById('auth-error').style.display='none';document.getElementById('auth-locked').style.display='none'}
+function showAuthError(m){var e=document.getElementById('auth-error');e.textContent=m;e.style.display='block'}
+
+function initAuth(){
+  // Reset old incompatible auth data
+  var av=localStorage.getItem('hasanah_auth_version');
+  if(av!=='v3'){localStorage.removeItem('hasanah_users');localStorage.removeItem('hasanah_session');localStorage.removeItem('hasanah_loginAttempts');localStorage.setItem('hasanah_auth_version','v3')}
+  
+  var users=[];try{users=JSON.parse(localStorage.getItem('hasanah_users')||'[]')}catch(e){users=[]}
+  var adminExists=false;for(var i=0;i<users.length;i++){if(users[i].email==='admin@hasanah.ai'){adminExists=true;break}}
+  if(!adminExists){users.push({id:'admin-local',name:'Admin',email:'admin@hasanah.ai',passwordHash:simpleHash('admin123'),role:'admin',createdAt:new Date().toISOString()});localStorage.setItem('hasanah_users',JSON.stringify(users))}
+
+  // Tab handlers
+  document.getElementById('tab-login').addEventListener('click',function(){this.classList.add('active');document.getElementById('tab-register').classList.remove('active');document.getElementById('login-panel').style.display='flex';document.getElementById('register-panel').style.display='none';hideAuthMessages()});
+  document.getElementById('tab-register').addEventListener('click',function(){this.classList.add('active');document.getElementById('tab-login').classList.remove('active');document.getElementById('register-panel').style.display='flex';document.getElementById('login-panel').style.display='none';hideAuthMessages()});
+
+  // Button handlers
+  document.getElementById('login-btn').addEventListener('click',handleLogin);
+  document.getElementById('reg-btn').addEventListener('click',handleRegister);
+  document.getElementById('login-email').addEventListener('keydown',function(e){if(e.key==='Enter')handleLogin()});
+  document.getElementById('login-password').addEventListener('keydown',function(e){if(e.key==='Enter')handleLogin()});
+  document.getElementById('reg-password').addEventListener('input',function(){checkPasswordStrength(this.value)});
+
+  var session=getValidSession();if(session)showApp(session);else showAuth()
 }
 
-function getLoginAttempts() {
-  try { return JSON.parse(localStorage.getItem('hasanah_loginAttempts') || '{"count":0,"lockedUntil":0}'); }
-  catch(e) { return {count:0, lockedUntil:0}; }
-}
-
-function recordFailedAttempt() {
-  var d = getLoginAttempts();
-  d.count += 1;
-  if (d.count >= 5) { d.lockedUntil = Date.now() + 300000; d.count = 0; }
-  localStorage.setItem('hasanah_loginAttempts', JSON.stringify(d));
-}
-
-function clearLoginAttempts() { localStorage.removeItem('hasanah_loginAttempts'); }
-
-function isAccountLocked() {
-  var d = getLoginAttempts();
-  if (d.lockedUntil && Date.now() < d.lockedUntil) return Math.ceil((d.lockedUntil - Date.now()) / 60000);
-  if (d.lockedUntil && Date.now() >= d.lockedUntil) clearLoginAttempts();
-  return 0;
-}
-
-var SESSION_DURATION = 86400000;
-
-function createSession(u) {
-  var s = { userId: u.id, name: u.name, email: u.email, role: u.role, createdAt: Date.now(), expiresAt: Date.now() + SESSION_DURATION };
-  localStorage.setItem('hasanah_session', JSON.stringify(s));
-  return s;
-}
-
-function getValidSession() {
-  try {
-    var s = JSON.parse(localStorage.getItem('hasanah_session'));
-    if (!s) return null;
-    if (Date.now() > s.expiresAt) { localStorage.removeItem('hasanah_session'); return null; }
-    return s;
-  } catch(e) { return null; }
-}
-
-function checkPasswordStrength(pwd) {
-  var fill = document.getElementById('pwd-fill');
-  var label = document.getElementById('pwd-label');
-  if (!fill || !label) return;
-  var s = 0;
-  if (pwd.length >= 8) s++;
-  if (pwd.length >= 12) s++;
-  if (/[A-Z]/.test(pwd)) s++;
-  if (/[0-9]/.test(pwd)) s++;
-  if (/[^A-Za-z0-9]/.test(pwd)) s++;
-  var levels = [
-    {w:'0%', c:'var(--bg)', t:''},
-    {w:'20%', c:'var(--danger)', t:'Very Weak'},
-    {w:'40%', c:'#E8976A', t:'Weak'},
-    {w:'60%', c:'var(--gold)', t:'Fair'},
-    {w:'80%', c:'var(--emerald)', t:'Strong'},
-    {w:'100%', c:'var(--success)', t:'Very Strong'}
-  ];
-  var v = levels[s] || levels[0];
-  fill.style.width = v.w;
-  fill.style.background = v.c;
-  label.textContent = v.t;
-  label.style.color = v.c;
-}
-
-function initAuth() {
-  // Seed admin account
-  var users = [];
-  try { users = JSON.parse(localStorage.getItem('hasanah_users') || '[]'); } catch(e) { users = []; }
-
-  var adminExists = false;
-  for (var i = 0; i < users.length; i++) {
-    if (users[i].email === 'admin@hasanah.ai') { adminExists = true; break; }
-  }
-
-  if (!adminExists) {
-    users.push({
-      id: 'admin-local',
-      name: 'Admin',
-      email: 'admin@hasanah.ai',
-      passwordHash: simpleHash('admin123'),
-      role: 'admin',
-      createdAt: new Date().toISOString()
-    });
-    localStorage.setItem('hasanah_users', JSON.stringify(users));
-  }
-
-  // Migrate old plain-text passwords
-  var needsSave = false;
-  for (var i = 0; i < users.length; i++) {
-    if (users[i].password && !users[i].passwordHash) {
-      users[i].passwordHash = simpleHash(users[i].password);
-      delete users[i].password;
-      needsSave = true;
-    }
-  }
-  if (needsSave) localStorage.setItem('hasanah_users', JSON.stringify(users));
-
-  // Setup tab click handlers
-  var tabLogin = document.getElementById('tab-login');
-  var tabRegister = document.getElementById('tab-register');
-  if (tabLogin) {
-    tabLogin.addEventListener('click', function() {
-      this.classList.add('active');
-      var other = document.getElementById('tab-register');
-      if (other) other.classList.remove('active');
-      document.getElementById('login-panel').style.display = 'block';
-      document.getElementById('register-panel').style.display = 'none';
-      hideAuthMessages();
-    });
-  }
-  if (tabRegister) {
-    tabRegister.addEventListener('click', function() {
-      this.classList.add('active');
-      var other = document.getElementById('tab-login');
-      if (other) other.classList.remove('active');
-      document.getElementById('register-panel').style.display = 'block';
-      document.getElementById('login-panel').style.display = 'none';
-      hideAuthMessages();
-    });
-  }
-
-  // Setup button click handlers (NOT form onsubmit)
-  var loginBtn = document.getElementById('login-btn');
-  if (loginBtn) loginBtn.addEventListener('click', handleLogin);
-
-  var regBtn = document.getElementById('reg-btn');
-  if (regBtn) regBtn.addEventListener('click', handleRegister);
-
-  // Enter key on login fields
-  var loginEmail = document.getElementById('login-email');
-  var loginPass = document.getElementById('login-password');
-  if (loginEmail) loginEmail.addEventListener('keydown', function(e) { if (e.key === 'Enter') handleLogin(); });
-  if (loginPass) loginPass.addEventListener('keydown', function(e) { if (e.key === 'Enter') handleLogin(); });
-
-  var regPass = document.getElementById('reg-password');
-  if (regPass) regPass.addEventListener('input', function() { checkPasswordStrength(this.value); });
-
-  // Check existing session
-  var session = getValidSession();
-  if (session) {
-    showApp(session);
-  } else {
-    showAuth();
-  }
-}
-
-function hideAuthMessages() {
-  document.getElementById('auth-error').style.display = 'none';
-  document.getElementById('auth-locked').style.display = 'none';
-}
-
-function showAuthError(m) {
-  var e = document.getElementById('auth-error');
-  e.textContent = m;
-  e.style.display = 'block';
-}
-
-function handleLogin() {
+function handleLogin(){
   hideAuthMessages();
-
-  var lockMin = isAccountLocked();
-  if (lockMin > 0) {
-    var le = document.getElementById('auth-locked');
-    le.innerHTML = '<i class="fas fa-lock"></i> Too many failed attempts. Try again in ' + lockMin + ' minute' + (lockMin > 1 ? 's' : '') + '.';
-    le.style.display = 'block';
-    return;
-  }
-
-  var email = document.getElementById('login-email').value.trim();
-  var password = document.getElementById('login-password').value;
-
-  if (!email || !password) {
-    showAuthError('Please enter both email and password.');
-    return;
-  }
-
-  var btn = document.getElementById('login-btn');
-  btn.disabled = true;
-  btn.textContent = 'Verifying...';
-
-  // Use setTimeout to allow UI to update
-  setTimeout(function() {
-    try {
-      var inputHash = simpleHash(password);
-      var users = [];
-      try { users = JSON.parse(localStorage.getItem('hasanah_users') || '[]'); } catch(e) { users = []; }
-
-      var matched = null;
-      for (var i = 0; i < users.length; i++) {
-        if (users[i].email === email && users[i].passwordHash === inputHash) {
-          matched = users[i];
-          break;
-        }
-      }
-
-      if (matched) {
-        clearLoginAttempts();
-        var session = createSession(matched);
-        showApp(session);
-        showToast('Welcome back, ' + matched.name + '!', 'success');
-      } else {
-        recordFailedAttempt();
-        var att = getLoginAttempts();
-        var rem = 5 - att.count;
-        showAuthError('Invalid email or password. ' + rem + ' attempt' + (rem !== 1 ? 's' : '') + ' remaining.');
-      }
-    } catch(err) {
-      showAuthError('Login error: ' + err.message);
-    }
-
-    btn.disabled = false;
-    btn.textContent = 'Login';
-  }, 100);
+  var lockMin=isAccountLocked();
+  if(lockMin>0){var le=document.getElementById('auth-locked');le.innerHTML='<i class="fas fa-lock"></i> Too many failed attempts. Try again in '+lockMin+' min.';le.style.display='block';return}
+  var email=document.getElementById('login-email').value.trim(),password=document.getElementById('login-password').value;
+  if(!email||!password){showAuthError('Please enter both email and password.');return}
+  var btn=document.getElementById('login-btn');btn.disabled=true;btn.textContent='Verifying...';
+  setTimeout(function(){
+    try{
+      var inputHash=simpleHash(password),users=[];try{users=JSON.parse(localStorage.getItem('hasanah_users')||'[]')}catch(e){users=[]}
+      var matched=null;for(var i=0;i<users.length;i++){if(users[i].email===email&&users[i].passwordHash===inputHash){matched=users[i];break}}
+      if(matched){clearLoginAttempts();var session=createSession(matched);showApp(session);showToast('Welcome back, '+matched.name+'!','success')}
+      else{recordFailedAttempt();var att=getLoginAttempts(),rem=5-att.count;showAuthError('Invalid email or password. '+rem+' attempt'+(rem!==1?'s':'')+' remaining.')}
+    }catch(err){showAuthError('Login error: '+err.message)}
+    btn.disabled=false;btn.textContent='Login'
+  },100)
 }
 
-function handleRegister() {
+function handleRegister(){
   hideAuthMessages();
-
-  var name = document.getElementById('reg-name').value.trim();
-  var email = document.getElementById('reg-email').value.trim();
-  var password = document.getElementById('reg-password').value;
-  var confirm = document.getElementById('reg-confirm').value;
-
-  if (!name || name.length < 2) { showAuthError('Name must be at least 2 characters.'); return; }
-  if (!email) { showAuthError('Please enter an email address.'); return; }
-  if (password.length < 8) { showAuthError('Password must be at least 8 characters.'); return; }
-  if (password !== confirm) { showAuthError('Passwords do not match.'); return; }
-
-  var s = 0;
-  if (password.length >= 8) s++;
-  if (password.length >= 12) s++;
-  if (/[A-Z]/.test(password)) s++;
-  if (/[0-9]/.test(password)) s++;
-  if (/[^A-Za-z0-9]/.test(pwd)) s++;
-  if (s < 3) { showAuthError('Password too weak. Add uppercase, numbers, or symbols.'); return; }
-
-  var btn = document.getElementById('reg-btn');
-  btn.disabled = true;
-  btn.textContent = 'Creating...';
-
-  setTimeout(function() {
-    try {
-      var users = [];
-      try { users = JSON.parse(localStorage.getItem('hasanah_users') || '[]'); } catch(e) { users = []; }
-
-      for (var i = 0; i < users.length; i++) {
-        if (users[i].email === email) {
-          showAuthError('An account with this email already exists.');
-          btn.disabled = false;
-          btn.textContent = 'Create Account';
-          return;
-        }
-      }
-
-      var newUser = {
-        id: 'user-' + Date.now(),
-        name: name,
-        email: email,
-        passwordHash: simpleHash(password),
-        role: 'student',
-        createdAt: new Date().toISOString()
-      };
-
-      users.push(newUser);
-      localStorage.setItem('hasanah_users', JSON.stringify(users));
-
-      var session = createSession(newUser);
-      showApp(session);
-      showToast('Account created! Welcome, ' + name, 'success');
-    } catch(err) {
-      showAuthError('Registration error: ' + err.message);
-    }
-
-    btn.disabled = false;
-    btn.textContent = 'Create Account';
-  }, 100);
+  var name=document.getElementById('reg-name').value.trim(),email=document.getElementById('reg-email').value.trim(),password=document.getElementById('reg-password').value,confirm=document.getElementById('reg-confirm').value;
+  if(!name||name.length<2){showAuthError('Name must be at least 2 characters.');return}
+  if(!email){showAuthError('Please enter an email address.');return}
+  if(password.length<8){showAuthError('Password must be at least 8 characters.');return}
+  if(password!==confirm){showAuthError('Passwords do not match.');return}
+  var s=0;if(password.length>=8)s++;if(password.length>=12)s++;if(/[A-Z]/.test(password))s++;if(/[0-9]/.test(password))s++;if(/[^A-Za-z0-9]/.test(password))s++;
+  if(s<3){showAuthError('Password too weak. Add uppercase, numbers, or symbols.');return}
+  var btn=document.getElementById('reg-btn');btn.disabled=true;btn.textContent='Creating...';
+  setTimeout(function(){
+    try{
+      var users=[];try{users=JSON.parse(localStorage.getItem('hasanah_users')||'[]')}catch(e){users=[]}
+      for(var i=0;i<users.length;i++){if(users[i].email===email){showAuthError('An account with this email already exists.');btn.disabled=false;btn.textContent='Create Account';return}}
+      var newUser={id:'user-'+Date.now(),name:name,email:email,passwordHash:simpleHash(password),role:'student',createdAt:new Date().toISOString()};
+      users.push(newUser);localStorage.setItem('hasanah_users',JSON.stringify(users));
+      var session=createSession(newUser);showApp(session);showToast('Account created! Welcome, '+name,'success')
+    }catch(err){showAuthError('Registration error: '+err.message)}
+    btn.disabled=false;btn.textContent='Create Account'
+  },100)
 }
 
-function handleLogout() {
-  localStorage.removeItem('hasanah_session');
-  showAuth();
-  showToast('Logged out successfully', 'info');
+function handleLogout(){localStorage.removeItem('hasanah_session');showAuth();showToast('Logged out successfully','info')}
+
+function showApp(user){
+  var o=document.getElementById('auth-overlay');if(o){o.style.opacity='0';o.style.pointerEvents='none'}
+  var ne=document.getElementById('sidebar-username');if(ne)ne.textContent=user.name;
+  var ee=document.getElementById('sidebar-email');if(ee)ee.textContent=user.email;
+  try{var ge=document.getElementById('greeting-text');if(ge){var h=new Date().getHours(),tg=h<12?'Good Morning':h<17?'Good Afternoon':'Good Evening';ge.innerHTML=tg+', <span style="color:var(--gold)">'+user.name.split(' ')[0]+'</span>'}}catch(e){}
 }
 
-function showApp(user) {
-  var overlay = document.getElementById('auth-overlay');
-  if (overlay) {
-    overlay.style.opacity = '0';
-    overlay.style.pointerEvents = 'none';
-  }
-
-  var nameEl = document.getElementById('sidebar-username');
-  if (nameEl) nameEl.textContent = user.name;
-  var emailEl = document.getElementById('sidebar-email');
-  if (emailEl) emailEl.textContent = user.email;
-
-  // Update dashboard greeting
-  try {
-    var greetingEl = document.querySelector('#page-dashboard h2');
-    if (greetingEl) {
-      var hour = new Date().getHours();
-      var tg = hour < 12 ? 'Good Morning' : hour < 17 ? 'Good Afternoon' : 'Good Evening';
-      greetingEl.innerHTML = tg + ', <span style="color:var(--gold)">' + user.name.split(' ')[0] + '</span>';
-    }
-  } catch(e) {}
-}
-
-function showAuth() {
-  var overlay = document.getElementById('auth-overlay');
-  if (overlay) {
-    overlay.style.opacity = '1';
-    overlay.style.pointerEvents = 'auto';
-  }
+function showAuth(){
+  var o=document.getElementById('auth-overlay');if(o){o.style.opacity='1';o.style.pointerEvents='auto'}
   hideAuthMessages();
-  // Reset to login tab
-  var tabLogin = document.getElementById('tab-login');
-  var tabRegister = document.getElementById('tab-register');
-  if (tabLogin) tabLogin.classList.add('active');
-  if (tabRegister) tabRegister.classList.remove('active');
-  document.getElementById('login-panel').style.display = 'block';
-  document.getElementById('register-panel').style.display = 'none';
-  // Clear fields
-  var le = document.getElementById('login-email');
-  var lp = document.getElementById('login-password');
-  if (le) le.value = '';
-  if (lp) lp.value = '';
+  document.getElementById('tab-login').classList.add('active');document.getElementById('tab-register').classList.remove('active');
+  document.getElementById('login-panel').style.display='flex';document.getElementById('register-panel').style.display='none';
+  document.getElementById('login-email').value='';document.getElementById('login-password').value=''
 }
+
 // ============================================
-// KNOWLEDGE BASE (Offline Fallback)
+// KNOWLEDGE BASE
 // ============================================
 var knowledgeBase=[
 {keywords:['five','pillars','pillers','arkan','foundation','basics'],answer:'The Five Pillars of Islam:\n\n1. **Shahada** (Declaration of Faith)\n2. **Salah** (Five daily prayers)\n3. **Zakat** (Obligatory charity - 2.5%)\n4. **Sawm** (Fasting in Ramadan)\n5. **Hajj** (Pilgrimage to Makkah)\n\nThey form the foundation of a Muslim\'s life.',category:'pillars'},
-{keywords:['salah','prayer','pray','namaz','how to pray','salat'],answer:'Salah is the second pillar. Five daily prayers:\n\n• **Fajr** — Before dawn (2 Rak\'ahs)\n• **Dhuhr** — After midday (4 Rak\'ahs)\n• **Asr** — Late afternoon (4 Rak\'ahs)\n• **Maghrib** — After sunset (3 Rak\'ahs)\n• **Isha** — Night (4 Rak\'ahs)',category:'fiqh'},
-{keywords:['quran','koran','book','revelation','scripture'],answer:'The Quran is Allah\'s word revealed to Prophet Muhammad (PBUH) through Jibreel over 23 years.\n\n• **114 Surahs**, **6,236 Ayahs**\n• Revealed in **Arabic**\n• First revelation: Surah Al-Alaq\n• Longest: Al-Baqarah (286 verses)\n• Divided into **30 Juz**',category:'quran'},
-{keywords:['muhammad','prophet','messenger','pbuh','seerah'],answer:'Prophet Muhammad (PBUH) — final messenger, born Makkah 570 CE.\n\n• Known as "Al-Amin"\n• First revelation at 40 in Cave Hira\n• Hijrah to Madinah 622 CE\n• Conquered Makkah peacefully 630 CE\n• "A mercy to the worlds" (21:107)',category:'prophet'},
-{keywords:['ramadan','fasting','sawm','roza','fast'],answer:'Ramadan — 9th Islamic month, fasting dawn to sunset.\n\n• **Suhoor**: Pre-dawn meal\n• **Iftar**: Break fast at sunset\n• Quran revealed in Ramadan (2:185)\n• **Laylat al-Qadr** in last 10 nights\n\nExemptions: Children, elderly, pregnant/nursing, travelers, the ill.',category:'pillars'},
-{keywords:['zakat','charity','give','poor','needy','alms','2.5'],answer:'Zakat — 3rd pillar, obligatory charity.\n\n• **2.5%** of qualifying wealth annually\n• Nisab: ~85g gold or ~595g silver\n• 8 recipients (Quran 9:60)\n\n**Sadaqah** = voluntary charity at any time.',category:'pillars'},
-{keywords:['hajj','pilgrimage','kaaba','mekkah','mecca'],answer:'Hajj — 5th pillar, pilgrimage to Makkah.\n\nIhram → Tawaf → Sa'i → Arafah → Muzdalifah → Jamarat → Eid al-Adha → Farewell Tawaf.\n\nOver 2 million Muslims perform it annually.',category:'pillars'},
-{keywords:['iman','faith','six','belief','pillars of iman'],answer:'Six Pillars of Iman:\n\n1. **Belief in Allah**\n2. **Belief in Angels**\n3. **Belief in Revealed Books**\n4. **Belief in Prophets**\n5. **Belief in Day of Judgment**\n6. **Belief in Divine Decree (Qadar)**',category:'pillars'},
-{keywords:['dua','supplication','ask allah','invocation'],answer:'Dua — personal supplication to Allah, anytime, any language.\n\n• Before eating: "Bismillah wa \'ala barakatillah"\n• After eating: "Alhamdulillahil-ladhi at\'amana"\n\n"Call upon Me, I will respond to you" — Quran 40:60',category:'fiqh'},
-{keywords:['wudu','ablution','wash','clean','purify'],answer:'Wudu steps:\n1. Niyyah + "Bismillah"\n2. Wash hands to wrists (3x)\n3. Rinse mouth (3x)\n4. Clean nostrils (3x)\n5. Wash face (3x)\n6. Wash arms to elbows (3x)\n7. Wipe head (Masah)\n8. Clean ears\n9. Wash feet to ankles (3x)\n\n"Allah loves those who purify themselves" — 2:222',category:'fiqh'},
-{keywords:['allah','god','creator','tawheed','oneness','one god'],answer:'Allah — the One and Only Creator.\n\n• **Tawheed**: No partners, equals, or children\n• **99 Names** (Asma ul-Husna)\n• Eternal, All-Knowing, Most Merciful\n\nSurah Al-Ikhlas summarizes Tawheed perfectly.',category:'pillars'},
-{keywords:['jannah','paradise','heaven','afterlife'],answer:'Jannah — eternal bliss for the righteous.\n\n• 8 gates\n• Greatest reward: Seeing Allah\n• Entry by Allah\'s Mercy\n\n"No soul knows what comfort is hidden for them" — 32:17',category:'faith'},
-{keywords:['islam','meaning','what is islam','surrender','submission','peace'],answer:'Islam = Peace through submission to Allah.\n\n• 1.9+ billion followers\n• Same message as all prophets\n• Based on Quran and Sunnah\n\n"Indeed, the religion in the sight of Allah is Islam" — 3:19',category:'basics'},
-{keywords:['eid','celebration','festival','holiday'],answer:'Two major Eids:\n\n**Eid al-Fitr** — End of Ramadan, Zakat al-Fitr, family gatherings.\n**Eid al-Adha** — 10th Dhul Hijjah, Qurbani, meat shared 3 ways.',category:'fiqh'},
-{keywords:['prophets','nabi','rasul','adam','ibrahim','musa','isa'],answer:'25 prophets in the Quran:\n\n• **Adam** — First human/prophet\n• **Ibrahim** — Friend of Allah\n• **Musa** — Spoke to Allah\n• **Isa** — Will return\n• **Muhammad** — Final messenger\n\nMuslims believe in ALL prophets equally (3:84).',category:'prophet'},
-{keywords:['halal','haram','food','eat','permissible','forbidden','pork','alcohol'],answer:'**Halal** = Permissible | **Haram** = Forbidden\n\nHalal: Zabiha meat, fish, fruits, vegetables, milk, honey\nHaram: Pork, alcohol, blood, improperly slaughtered meat\n\n"Eat of the good things" — 2:172',category:'fiqh'},
-{keywords:['angels','malaikah','jibreel','mikael'],answer:'Angels (Mala\'ikah) — created from light:\n\n• **Jibreel** — Revelation\n• **Mikael** — Rain & provisions\n• **Israfeel** — Trumpet on Judgment Day\n• **Azrael** — Angel of death\n• **Kiraman Katibeen** — Recording angels',category:'faith'},
-{keywords:['tawbah','repent','forgiveness','forgive','sin','astaghfirullah'],answer:'Tawbah — turning back to Allah:\n\n1. Stop the sin\n2. Sincere regret\n3. Resolve never to repeat\n4. Restore others\' rights\n\n"Do not despair of Allah\'s mercy" — 39:53',category:'fiqh'},
+{keywords:['salah','prayer','pray','namaz','salat'],answer:'Salah is the second pillar. Five daily prayers:\n\n• **Fajr** — Before dawn (2 Rak\'ahs)\n• **Dhuhr** — After midday (4 Rak\'ahs)\n• **Asr** — Late afternoon (4 Rak\'ahs)\n• **Maghrib** — After sunset (3 Rak\'ahs)\n• **Isha** — Night (4 Rak\'ahs)',category:'fiqh'},
+{keywords:['quran','koran','book','revelation'],answer:'The Quran is Allah\'s word revealed to Prophet Muhammad (PBUH) through Jibreel over 23 years.\n\n• **114 Surahs**, **6,236 Ayahs**\n• Revealed in **Arabic**\n• Divided into **30 Juz**',category:'quran'},
+{keywords:['muhammad','prophet','messenger','pbuh','seerah'],answer:'Prophet Muhammad (PBUH) — final messenger, born Makkah 570 CE.\n\n• Known as "Al-Amin"\n• First revelation at 40 in Cave Hira\n• Hijrah to Madinah 622 CE\n• "A mercy to the worlds" (21:107)',category:'prophet'},
+{keywords:['ramadan','fasting','sawm','roza','fast'],answer:'Ramadan — 9th Islamic month, fasting dawn to sunset.\n\n• **Suhoor**: Pre-dawn meal\n• **Iftar**: Break fast at sunset\n• Quran revealed in Ramadan (2:185)\n• **Laylat al-Qadr** in last 10 nights',category:'pillars'},
+{keywords:['zakat','charity','give','poor','2.5'],answer:'Zakat — 3rd pillar, obligatory charity.\n\n• **2.5%** of qualifying wealth annually\n• Nisab: ~85g gold\n• 8 recipients (Quran 9:60)',category:'pillars'},
+{keywords:['hajj','pilgrimage','kaaba','mekkah'],answer:'Hajj — 5th pillar, pilgrimage to Makkah.\n\nIhram → Tawaf → Sa\'i → Arafah → Muzdalifah → Jamarat → Eid al-Adha → Farewell Tawaf',category:'pillars'},
+{keywords:['iman','faith','six','belief'],answer:'Six Pillars of Iman:\n\n1. **Belief in Allah**\n2. **Belief in Angels**\n3. **Belief in Revealed Books**\n4. **Belief in Prophets**\n5. **Belief in Day of Judgment**\n6. **Belief in Divine Decree (Qadar)**',category:'pillars'},
+{keywords:['dua','supplication','ask allah'],answer:'Dua — personal supplication to Allah, anytime, any language.\n\n"Call upon Me, I will respond to you" — Quran 40:60',category:'fiqh'},
+{keywords:['wudu','ablution','wash','clean'],answer:'Wudu steps:\n1. Niyyah + "Bismillah"\n2. Wash hands to wrists (3x)\n3. Rinse mouth (3x)\n4. Clean nostrils (3x)\n5. Wash face (3x)\n6. Wash arms to elbows (3x)\n7. Wipe head\n8. Clean ears\n9. Wash feet to ankles (3x)',category:'fiqh'},
+{keywords:['allah','god','creator','tawheed','oneness'],answer:'Allah — the One and Only Creator.\n\n• **Tawheed**: No partners, equals, or children\n• **99 Names** (Asma ul-Husna)\n• Eternal, All-Knowing, Most Merciful',category:'pillars'},
+{keywords:['jannah','paradise','heaven','afterlife'],answer:'Jannah — eternal bliss for the righteous.\n\n• 8 gates\n• Greatest reward: Seeing Allah\n• Entry by Allah\'s Mercy',category:'faith'},
+{keywords:['islam','meaning','surrender','submission','peace'],answer:'Islam = Peace through submission to Allah.\n\n• 1.9+ billion followers\n• Same message as all prophets\n\n"Indeed, the religion in the sight of Allah is Islam" — 3:19',category:'basics'},
+{keywords:['eid','celebration','festival'],answer:'Two major Eids:\n\n**Eid al-Fitr** — End of Ramadan\n**Eid al-Adha** — 10th Dhul Hijjah, Qurbani',category:'fiqh'},
+{keywords:['prophets','nabi','rasul','adam','ibrahim','musa','isa'],answer:'25 prophets in the Quran. Key prophets:\n\n• **Adam** — First human/prophet\n• **Ibrahim** — Friend of Allah\n• **Musa** — Spoke to Allah\n• **Isa** — Will return\n• **Muhammad** — Final messenger',category:'prophet'},
+{keywords:['halal','haram','food','eat','pork','alcohol'],answer:'**Halal** = Permissible | **Haram** = Forbidden\n\nHalal: Zabiha meat, fish, fruits, milk\nHaram: Pork, alcohol, blood\n\n"Eat of the good things" — 2:172',category:'fiqh'},
+{keywords:['angels','malaikah','jibreel','mikael'],answer:'Angels — created from light:\n\n• **Jibreel** — Revelation\n• **Mikael** — Rain & provisions\n• **Israfeel** — Trumpet on Judgment Day\n• **Azrael** — Angel of death',category:'faith'},
+{keywords:['tawbah','repent','forgiveness','sin','astaghfirullah'],answer:'Tawbah — turning back to Allah:\n\n1. Stop the sin\n2. Sincere regret\n3. Resolve never to repeat\n4. Restore others\' rights\n\n"Do not despair of Allah\'s mercy" — 39:53',category:'fiqh'},
 {keywords:['dhikr','remembrance','zikr','subhanallah','alhamdulillah'],answer:'Dhikr = Remembrance of Allah:\n\n• **SubhanAllah** (Glory to Allah)\n• **Alhamdulillah** (Praise to Allah)\n• **Allahu Akbar** (Allah is Greatest)\n• **Astaghfirullah** (I seek forgiveness)\n\n"In the remembrance of Allah do hearts find rest" — 13:28',category:'fiqh'}
 ];
 
 // ============================================
-// QUIZ BANK (Offline Fallback)
+// QUIZ BANK
 // ============================================
 var quizBank=[
 {q:"How many Surahs are in the Quran?",o:["114","120","100","110"],c:0,cat:"quran",diff:"easy"},
@@ -678,7 +413,7 @@ var quizBank=[
 {q:"Which Surah is the 'Heart of the Quran'?",o:["Al-Fatihah","Yaseen","Ar-Rahman","Al-Mulk"],c:1,cat:"quran",diff:"medium"},
 {q:"What is the Zakat percentage on savings?",o:["1%","5%","10%","2.5%"],c:3,cat:"pillars",diff:"medium"},
 {q:"How many Rak'ahs in Fajr prayer?",o:["2","3","4","1"],c:0,cat:"fiqh",diff:"medium"},
-{q:"Who is 'Khalilullah' (Friend of Allah)?",o:["Musa","Ibrahim","Isa","Nuh"],c:1,cat:"prophet",diff:"medium"},
+{q:"Who is 'Khalilullah'?",o:["Musa","Ibrahim","Isa","Nuh"],c:1,cat:"prophet",diff:"medium"},
 {q:"What is the night prayer in Ramadan?",o:["Fajr","Taraweeh","Isha","Tahajjud"],c:1,cat:"fiqh",diff:"medium"},
 {q:"In which Hijri year was Badr fought?",o:["1st","2nd","3rd","4th"],c:1,cat:"history",diff:"medium"},
 {q:"What is the last Surah of the Quran?",o:["Al-Falaq","An-Nas","Al-Ikhlas","Al-Kawthar"],c:1,cat:"quran",diff:"medium"},
@@ -770,7 +505,7 @@ var navItems=document.querySelectorAll('.nav-item');for(var i=0;i<navItems.lengt
 document.getElementById('menu-toggle').addEventListener('click',function(){document.getElementById('sidebar').classList.toggle('open')});
 
 // ============================================
-// ISLAMIC Q&A (Real AI + Offline Fallback)
+// ISLAMIC Q&A
 // ============================================
 var GROQ_API_KEY="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";
 
@@ -779,7 +514,7 @@ function showTypingIndicator(){var c=document.getElementById('chat-container');i
 function removeTypingIndicator(id){var e=document.getElementById(id);if(e&&e.parentNode)e.parentNode.removeChild(e);var c=document.getElementById('chat-container');if(c)c.scrollTop=c.scrollHeight}
 function formatAIResponse(t){if(!t)return'';return t.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>')}
 
-async function sendQuestion(){var input=document.getElementById('qa-input');if(!input)return;var q=input.value.trim();if(!q)return;input.value='';addChatMessage(escapeHtml(q),true);var typingId=showTypingIndicator();var answer="";if(GROQ_API_KEY&&GROQ_API_KEY.length>10){var models=['llama-3.1-8b-instant','llama3-8b-8192','llama-3.3-70b-versatile'];var success=false;for(var m=0;m<models.length;m++){try{var response=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+GROQ_API_KEY},body:JSON.stringify({model:models[m],messages:[{role:'system',content:'You are Hasanah AI, a knowledgeable and respectful Islamic learning assistant. Provide accurate answers based on the Quran and authentic Hadith. If unsure, say so politely. Keep answers concise and well-formatted. Use bullet points or bold text where helpful. Always respond in English unless the user asks for Arabic.'},{role:'user',content:q}],temperature:0.3,max_tokens:800})});if(!response.ok){var ed=await response.json();if(response.status===400||response.status===404)continue;if(response.status===401||response.status===403)throw new Error('Invalid API Key');throw new Error('API Error '+response.status)}var data=await response.json();if(data.choices&&data.choices[0]&&data.choices[0].message){answer=data.choices[0].message.content;success=true;break}}catch(error){if(m===models.length-1||error.message.indexOf('Invalid API Key')!==-1){answer=findLocalAnswer(q);answer+='<br><br><p style="font-size:11px;color:var(--danger)"><i>AI Error: '+escapeHtml(error.message)+'. Showing offline answer.</i></p>'}}}if(!success&&!answer){answer=findLocalAnswer(q);answer+='<br><br><p style="font-size:11px;color:var(--danger)"><i>AI unavailable. Showing offline answer.</i></p>'}}else{answer=findLocalAnswer(q);answer+='<br><br><p style="font-size:11px;color:var(--text2)"><i>Running in offline mode. Add API key for real AI answers.</i></p>'}removeTypingIndicator(typingId);addChatMessage(formatAIResponse(answer),false)}
+async function sendQuestion(){var input=document.getElementById('qa-input');if(!input)return;var q=input.value.trim();if(!q)return;input.value='';addChatMessage(escapeHtml(q),true);var typingId=showTypingIndicator();var answer="";if(GROQ_API_KEY&&GROQ_API_KEY.length>10){var models=['llama-3.1-8b-instant','llama3-8b-8192','llama-3.3-70b-versatile'];var success=false;for(var m=0;m<models.length;m++){try{var response=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+GROQ_API_KEY},body:JSON.stringify({model:models[m],messages:[{role:'system',content:'You are Hasanah AI, a knowledgeable and respectful Islamic learning assistant. Provide accurate answers based on the Quran and authentic Hadith. If unsure, say so politely. Keep answers concise and well-formatted. Use bullet points or bold text where helpful.'},{role:'user',content:q}],temperature:0.3,max_tokens:800})});if(!response.ok){if(response.status===400||response.status===404)continue;if(response.status===401||response.status===403)throw new Error('Invalid API Key');throw new Error('API Error '+response.status)}var data=await response.json();if(data.choices&&data.choices[0]&&data.choices[0].message){answer=data.choices[0].message.content;success=true;break}}catch(error){if(m===models.length-1||error.message.indexOf('Invalid API Key')!==-1){answer=findLocalAnswer(q);answer+='<br><br><p style="font-size:11px;color:var(--danger)"><i>AI Error: '+escapeHtml(error.message)+'. Offline answer.</i></p>'}}}if(!success&&!answer){answer=findLocalAnswer(q);answer+='<br><br><p style="font-size:11px;color:var(--danger)"><i>AI unavailable. Offline answer.</i></p>'}}else{answer=findLocalAnswer(q);answer+='<br><br><p style="font-size:11px;color:var(--text2)"><i>Running in offline mode.</i></p>'}removeTypingIndicator(typingId);addChatMessage(formatAIResponse(answer),false)}
 
 function quickQuestion(q){var i=document.getElementById('qa-input');if(i)i.value=q;sendQuestion()}
 
@@ -798,13 +533,11 @@ function updatePrayerTimeline(){if(!appState.prayerTimes)return;var c=document.g
 
 function updateCountdown(){if(!appState.prayerTimes)return;var now=new Date(),cH=now.getHours()+now.getMinutes()/60+now.getSeconds()/3600,prayers=['fajr','dhuhr','asr','maghrib','isha'],np=null,nt=0;for(var i=0;i<prayers.length;i++){if(cH<appState.prayerTimes[prayers[i]]){np=prayers[i];nt=appState.prayerTimes[prayers[i]];break}}if(!np){np='fajr';nt=appState.prayerTimes.fajr+24}var diff=nt-cH,ts=Math.max(0,Math.floor(diff*3600)),h=Math.floor(ts/3600),m=Math.floor((ts%3600)/60),s=ts%60;var ct=document.getElementById('countdown-time');if(ct)ct.textContent=(h<10?'0':'')+h+':'+(m<10?'0':'')+m+':'+(s<10?'0':'')+s;var cl=document.getElementById('countdown-label');if(cl)cl.textContent='until '+np.charAt(0).toUpperCase()+np.slice(1);var circle=document.getElementById('timer-circle');if(circle){var circ=2*Math.PI*54,prog=Math.min(1,ts/21600);circle.setAttribute('stroke-dashoffset',circ*(1-prog))}}
 
-function detectLocation(){if(navigator.geolocation){navigator.geolocation.getCurrentPosition(function(p){appState.userLat=p.coords.latitude;appState.userLng=p.coords.longitude;appState.prayerTimes=calculatePrayerTimes(appState.userLat,appState.userLng);appState.userCity='Your Location';var ld=document.getElementById('location-display');if(ld)ld.textContent='Lat: '+appState.userLat.toFixed(2)+', Lng: '+appState.userLng.toFixed(2);var ci=document.getElementById('city-input');if(ci)ci.value='Your Location';updatePrayerDisplay();showToast('Location detected!','success')},function(){showToast('Location denied. Using default.','warning');setDefaultLocation()})}else setDefaultLocation()}
-
+function detectLocation(){if(navigator.geolocation){navigator.geolocation.getCurrentPosition(function(p){appState.userLat=p.coords.latitude;appState.userLng=p.coords.longitude;appState.prayerTimes=calculatePrayerTimes(appState.userLat,appState.userLng);appState.userCity='Your Location';var ld=document.getElementById('location-display');if(ld)ld.textContent='Lat: '+appState.userLat.toFixed(2)+', Lng: '+appState.userLng.toFixed(2);var ci=document.getElementById('city-input');if(ci)ci.value='Your Location';updatePrayerDisplay();showToast('Location detected!','success')},function(){showToast('Location denied.','warning');setDefaultLocation()})}else setDefaultLocation()}
 function setDefaultLocation(){appState.prayerTimes=calculatePrayerTimes(appState.userLat,appState.userLng);var ld=document.getElementById('location-display');if(ld)ld.textContent='Default: '+appState.userCity;var ci=document.getElementById('city-input');if(ci)ci.value=appState.userCity;updatePrayerDisplay()}
 
 var cityCoords={'dubai':[25.2,55.3],'makkah':[21.4,39.8],'madinah':[24.5,39.6],'riyadh':[24.7,46.7],'cairo':[30.0,31.2],'istanbul':[41.0,29.0],'london':[51.5,-0.1],'new york':[40.7,-74.0],'jakarta':[-6.2,106.8],'kuala lumpur':[3.1,101.7],'karachi':[24.9,67.0],'lahore':[31.5,74.3],'dhaka':[23.8,90.4],'casablanca':[33.6,-7.6],'tehran':[35.7,51.4],'baghdad':[33.3,44.4],'damascus':[33.5,36.3],'amman':[31.9,35.9],'jerusalem':[31.8,35.2],'muscat':[23.6,58.2],'doha':[25.3,51.5],'kuwait':[29.4,47.9],'manama':[26.2,50.6],'sanaa':[15.4,44.2]};
-
-function searchCity(){var input=document.getElementById('city-input');if(!input)return;var val=input.value.toLowerCase().trim();if(cityCoords[val]){appState.userLat=cityCoords[val][0];appState.userLng=cityCoords[val][1];appState.userCity=val.charAt(0).toUpperCase()+val.slice(1)}else{var match=null,keys=Object.keys(cityCoords);for(var i=0;i<keys.length;i++){if(keys[i].indexOf(val)!==-1||val.indexOf(keys[i])!==-1){match=keys[i];break}}if(match){appState.userLat=cityCoords[match][0];appState.userLng=cityCoords[match][1];appState.userCity=match.charAt(0).toUpperCase()+match.slice(1)}else{showToast('City not found. Try: Dubai, Makkah, Cairo...','warning');return}}appState.prayerTimes=calculatePrayerTimes(appState.userLat,appState.userLng);var ld=document.getElementById('location-display');if(ld)ld.textContent=appState.userCity+' ('+appState.userLat.toFixed(1)+', '+appState.userLng.toFixed(1)+')';updatePrayerDisplay();showToast('Prayer times updated for '+appState.userCity,'success')}
+function searchCity(){var input=document.getElementById('city-input');if(!input)return;var val=input.value.toLowerCase().trim();if(cityCoords[val]){appState.userLat=cityCoords[val][0];appState.userLng=cityCoords[val][1];appState.userCity=val.charAt(0).toUpperCase()+val.slice(1)}else{var match=null,keys=Object.keys(cityCoords);for(var i=0;i<keys.length;i++){if(keys[i].indexOf(val)!==-1||val.indexOf(keys[i])!==-1){match=keys[i];break}}if(match){appState.userLat=cityCoords[match][0];appState.userLng=cityCoords[match][1];appState.userCity=match.charAt(0).toUpperCase()+match.slice(1)}else{showToast('City not found.','warning');return}}appState.prayerTimes=calculatePrayerTimes(appState.userLat,appState.userLng);var ld=document.getElementById('location-display');if(ld)ld.textContent=appState.userCity+' ('+appState.userLat.toFixed(1)+', '+appState.userLng.toFixed(1)+')';updatePrayerDisplay();showToast('Prayer times updated for '+appState.userCity,'success')}
 
 // ============================================
 // DASHBOARD
@@ -831,13 +564,13 @@ function deleteAssignment(id){appState.assignments=appState.assignments.filter(f
 function filterAssignments(f){appState.assignmentFilter=f;var btns=document.querySelectorAll('.assign-filter');for(var i=0;i<btns.length;i++)btns[i].style.opacity=btns[i].dataset.filter===f?'1':'0.5';renderAssignments()}
 
 // ============================================
-// AI QUIZ (AI-Generated + Local Fallback)
+// AI QUIZ
 // ============================================
-async function startQuiz(){var cat=document.getElementById('quiz-category').value,diff=document.getElementById('quiz-difficulty').value;document.getElementById('quiz-start').style.display='none';document.getElementById('quiz-result').style.display='none';var activeArea=document.getElementById('quiz-active');activeArea.style.display='block';activeArea.innerHTML='<div class="card text-center py-12"><i class="fas fa-cogs text-4xl mb-4 animate-pulse" style="color:var(--gold)"></i><h3 class="text-lg font-bold mb-2">Generating Your Quiz...</h3><p class="text-sm" style="color:var(--text2)">AI is crafting unique questions for you</p></div>';if(GROQ_API_KEY&&GROQ_API_KEY.length>10){try{var qs=await generateAIQuiz(cat,diff);if(qs&&qs.length>0){appState.quizState={questions:qs,current:0,score:0,answered:false};restoreQuizUI();renderQuestion();return}}catch(e){console.error('AI Quiz failed, using local:',e)}}loadLocalQuiz(cat,diff)}
+async function startQuiz(){var cat=document.getElementById('quiz-category').value,diff=document.getElementById('quiz-difficulty').value;document.getElementById('quiz-start').style.display='none';document.getElementById('quiz-result').style.display='none';var activeArea=document.getElementById('quiz-active');activeArea.style.display='block';activeArea.innerHTML='<div class="card text-center py-12"><i class="fas fa-cogs text-4xl mb-4 animate-pulse" style="color:var(--gold)"></i><h3 class="text-lg font-bold mb-2">Generating Your Quiz...</h3><p class="text-sm" style="color:var(--text2)">AI is crafting unique questions</p></div>';if(GROQ_API_KEY&&GROQ_API_KEY.length>10){try{var qs=await generateAIQuiz(cat,diff);if(qs&&qs.length>0){appState.quizState={questions:qs,current:0,score:0,answered:false};restoreQuizUI();renderQuestion();return}}catch(e){console.error('AI Quiz failed:',e)}}loadLocalQuiz(cat,diff)}
 
-async function generateAIQuiz(cat,diff){var catNames={all:'general Islamic knowledge (Quran, Prophets, Pillars, History, Fiqh)',quran:'the Quran (Surahs, Ayahs, revelation, content)',prophet:'Prophets and Seerah (lives of Prophets, especially Muhammad PBUH)',pillars:'the Five Pillars of Islam',history:'Islamic history (Caliphates, major events, civilization)',fiqh:'Fiqh and Worship (prayer rules, halal/haram, daily worship)'};var diffDesc={easy:'basic beginner-level',medium:'intermediate',hard:'challenging advanced-level'};var topic=catNames[cat]||catNames.all,dd=diffDesc[diff]||diffDesc.easy;var prompt='Generate exactly 10 multiple-choice questions about '+topic+'. Make them '+dd+'. Return ONLY valid JSON array with no extra text. Each object must have: "q" (question string), "o" (array of exactly 4 option strings), "c" (index of correct answer, 0-3). Example format: [{"q":"Question?","o":["A","B","C","D"],"c":0}]. Do not include any markdown, code blocks, or explanation. Only the raw JSON array.';var response=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+GROQ_API_KEY},body:JSON.stringify({model:'llama-3.1-8b-instant',messages:[{role:'system',content:'You are an Islamic quiz generator. Return ONLY valid JSON. No markdown, no code blocks, no explanation.'},{role:'user',content:prompt}],temperature:0.7,max_tokens:2000})});if(!response.ok)throw new Error('API Error '+response.status);var data=await response.json();if(!data.choices||!data.choices[0])throw new Error('No response');var content=data.choices[0].message.content.trim();content=content.replace(/```json\s*/g,'').replace(/```\s*/g,'').trim();var questions=JSON.parse(content);if(!Array.isArray(questions)||questions.length===0)throw new Error('Invalid format');var valid=[];for(var i=0;i<questions.length;i++){var q=questions[i];if(q.q&&Array.isArray(q.o)&&q.o.length===4&&typeof q.c==='number'&&q.c>=0&&q.c<=3)valid.push(q)}if(valid.length===0)throw new Error('No valid questions');return valid.slice(0,10)}
+async function generateAIQuiz(cat,diff){var catNames={all:'general Islamic knowledge (Quran, Prophets, Pillars, History, Fiqh)',quran:'the Quran',prophet:'Prophets and Seerah',pillars:'the Five Pillars of Islam',history:'Islamic history',fiqh:'Fiqh and Worship'};var diffDesc={easy:'basic beginner-level',medium:'intermediate',hard:'challenging advanced-level'};var topic=catNames[cat]||catNames.all,dd=diffDesc[diff]||diffDesc.easy;var prompt='Generate exactly 10 multiple-choice questions about '+topic+'. Make them '+dd+'. Return ONLY valid JSON array. Each object must have: "q" (question string), "o" (array of exactly 4 option strings), "c" (index of correct answer 0-3). Example: [{"q":"Question?","o":["A","B","C","D"],"c":0}]. No markdown, no code blocks, no explanation. Only raw JSON array.';var response=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+GROQ_API_KEY},body:JSON.stringify({model:'llama-3.1-8b-instant',messages:[{role:'system',content:'You are an Islamic quiz generator. Return ONLY valid JSON. No markdown, no code blocks.'},{role:'user',content:prompt}],temperature:0.7,max_tokens:2000})});if(!response.ok)throw new Error('API Error '+response.status);var data=await response.json();if(!data.choices||!data.choices[0])throw new Error('No response');var content=data.choices[0].message.content.trim();content=content.replace(/```json\s*/g,'').replace(/```\s*/g,'').trim();var questions=JSON.parse(content);if(!Array.isArray(questions)||questions.length===0)throw new Error('Invalid format');var valid=[];for(var i=0;i<questions.length;i++){var q=questions[i];if(q.q&&Array.isArray(q.o)&&q.o.length===4&&typeof q.c==='number'&&q.c>=0&&q.c<=3)valid.push(q)}if(valid.length===0)throw new Error('No valid questions');return valid.slice(0,10)}
 
-function loadLocalQuiz(cat,diff){var questions=quizBank.slice();if(cat!=='all')questions=questions.filter(function(q){return q.cat===cat});if(diff==='easy')questions=questions.filter(function(q){return q.diff==='easy'});else if(diff==='medium')questions=questions.filter(function(q){return q.diff==='easy'||q.diff==='medium'});questions=questions.sort(function(){return Math.random()-0.5}).slice(0,10);if(questions.length===0){showToast('No questions found. Try another category.','warning');resetQuiz();return}appState.quizState={questions:questions,current:0,score:0,answered:false};restoreQuizUI();renderQuestion()}
+function loadLocalQuiz(cat,diff){var questions=quizBank.slice();if(cat!=='all')questions=questions.filter(function(q){return q.cat===cat});if(diff==='easy')questions=questions.filter(function(q){return q.diff==='easy'});else if(diff==='medium')questions=questions.filter(function(q){return q.diff==='easy'||q.diff==='medium'});questions=questions.sort(function(){return Math.random()-0.5}).slice(0,10);if(questions.length===0){showToast('No questions found.','warning');resetQuiz();return}appState.quizState={questions:questions,current:0,score:0,answered:false};restoreQuizUI();renderQuestion()}
 
 function restoreQuizUI(){var activeArea=document.getElementById('quiz-active');activeArea.innerHTML='<div class="card mb-4"><div class="flex items-center justify-between mb-4"><span class="badge badge-gold" id="quiz-progress">Question 1/10</span><span class="text-sm font-semibold" style="color:var(--gold)" id="quiz-score-live">Score: 0</span></div><div class="progress-bar mb-6"><div class="progress-fill" id="quiz-progress-bar" style="width:10%"></div></div><h3 class="text-lg font-semibold mb-6" id="quiz-question"></h3><div class="flex flex-col gap-3" id="quiz-options"></div></div><div class="flex justify-end"><button class="btn btn-gold" id="quiz-next-btn" onclick="nextQuestion()" style="display:none"><i class="fas fa-arrow-right"></i>Next</button></div>'}
 
@@ -845,7 +578,7 @@ function renderQuestion(){var qs=appState.quizState;if(!qs)return;var q=qs.quest
 
 function selectAnswer(idx){var qs=appState.quizState;if(!qs||qs.answered)return;qs.answered=true;var q=qs.questions[qs.current],correct=q.c;var ce=document.getElementById('opt-'+correct);if(ce)ce.classList.add('correct');if(idx!==correct){var we=document.getElementById('opt-'+idx);if(we){we.classList.add('wrong');we.classList.add('selected')}}else{qs.score++;var re=document.getElementById('opt-'+idx);if(re)re.classList.add('selected')}var opts=document.querySelectorAll('.quiz-option');for(var i=0;i<opts.length;i++)opts[i].style.pointerEvents='none';document.getElementById('quiz-score-live').textContent='Score: '+qs.score;document.getElementById('quiz-next-btn').style.display='inline-flex';document.getElementById('quiz-next-btn').innerHTML=qs.current<qs.questions.length-1?'<i class="fas fa-arrow-right"></i>Next':'<i class="fas fa-flag-checkered"></i>Finish'}
 
-function nextQuestion(){var qs=appState.quizState;if(!qs)return;qs.current++;if(qs.current>=qs.questions.length){var pct=Math.round((qs.score/qs.questions.length)*100);document.getElementById('quiz-active').style.display='none';document.getElementById('quiz-result').style.display='block';document.getElementById('quiz-final-score').textContent=qs.score+'/'+qs.questions.length;document.getElementById('quiz-percent').textContent=pct+'%';var msg=pct===100?"Masha'Allah! Perfect!":pct>=80?'Excellent work!':pct>=60?'Good effort!':pct>=40?'Nice try! Review and retry.':"Don't give up!";document.getElementById('quiz-message').textContent=msg;appState.quizScores.push(pct);saveState();updateDashboard()}else renderQuestion()}
+function nextQuestion(){var qs=appState.quizState;if(!qs)return;qs.current++;if(qs.current>=qs.questions.length){var pct=Math.round((qs.score/qs.questions.length)*100);document.getElementById('quiz-active').style.display='none';document.getElementById('quiz-result').style.display='block';document.getElementById('quiz-final-score').textContent=qs.score+'/'+qs.questions.length;document.getElementById('quiz-percent').textContent=pct+'%';var msg=pct===100?"Masha'Allah! Perfect!":pct>=80?'Excellent work!':pct>=60?'Good effort!':pct>=40?'Nice try!':"Don't give up!";document.getElementById('quiz-message').textContent=msg;appState.quizScores.push(pct);saveState();updateDashboard()}else renderQuestion()}
 
 function resetQuiz(){appState.quizState=null;document.getElementById('quiz-start').style.display='block';document.getElementById('quiz-active').style.display='none';document.getElementById('quiz-result').style.display='none'}
 
@@ -882,7 +615,6 @@ document.addEventListener('keydown',function(e){if(appState.currentPage==='arabi
 // INIT
 // ============================================
 function init(){initAuth();createParticles();appState.prayerTimes=calculatePrayerTimes(appState.userLat,appState.userLng);var ci=document.getElementById('city-input');if(ci)ci.value=appState.userCity;var ld=document.getElementById('location-display');if(ld)ld.textContent='Default: '+appState.userCity+' ('+appState.userLat.toFixed(1)+', '+appState.userLng.toFixed(1)+')';updateDashboard();updatePrayerDisplay();renderStudySessions();renderAssignments();renderFlashcard();renderArabicWordList();updateArabicProgress();setInterval(updateCountdown,1000);updateCountdown();setInterval(function(){updatePrayerDisplay();updatePrayerTimeline()},60000);if(navigator.geolocation){navigator.geolocation.getCurrentPosition(function(p){appState.userLat=p.coords.latitude;appState.userLng=p.coords.longitude;appState.userCity='Your Location';appState.prayerTimes=calculatePrayerTimes(appState.userLat,appState.userLng);if(ci)ci.value='Your Location';if(ld)ld.textContent='Detected: '+appState.userLat.toFixed(2)+', '+appState.userLng.toFixed(2);updatePrayerDisplay();updatePrayerTimeline()},function(){})}}
-
 init();
 </script>
 </body>
