@@ -507,7 +507,7 @@ document.getElementById('menu-toggle').addEventListener('click',function(){docum
 // ============================================
 // ISLAMIC Q&A
 // ============================================
-var GROQ_API_KEY="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";
+var GROQ_API_KEY="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";
 
 function addChatMessage(text,isUser){var c=document.getElementById('chat-container');if(!c)return;var d=document.createElement('div');d.className='chat-msg '+(isUser?'chat-user':'chat-ai');var p=document.createElement('p');p.innerHTML=text;d.appendChild(p);c.appendChild(d);c.scrollTop=c.scrollHeight}
 function showTypingIndicator(){var c=document.getElementById('chat-container');if(!c)return'';var id='typing-'+Date.now(),d=document.createElement('div');d.className='chat-msg chat-ai';d.id=id;d.innerHTML='<span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span>';c.appendChild(d);c.scrollTop=c.scrollHeight;return id}
