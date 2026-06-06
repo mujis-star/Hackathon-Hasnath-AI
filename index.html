@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hasanah AI – Smart Islamic & Academic Assistant</title>
+<title>Hasanath AI – Smart Islamic & Academic Assistant</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -114,7 +114,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 <div class="auth-card">
 <div class="text-center mb-6">
 <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#2D9B72] to-[#D4A853] flex items-center justify-center mx-auto mb-4"><i class="fas fa-moon text-[#070E0B] text-xl"></i></div>
-<h1 class="text-2xl font-bold" style="color:var(--gold)">Hasanah AI</h1>
+<h1 class="text-2xl font-bold" style="color:var(--gold)">Hasanath AI</h1>
 <p class="text-xs mt-1" style="color:var(--text2)">Smart Islamic & Academic Assistant</p>
 </div>
 <div class="auth-tabs">
@@ -127,7 +127,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 <input type="email" class="input-field" id="login-email" placeholder="Email address" autocomplete="email">
 <input type="password" class="input-field" id="login-password" placeholder="Password">
 <button class="auth-btn" id="login-btn" type="button">Login</button>
-<p class="text-xs text-center" style="color:var(--text2)">Admin: admin@hasanah.ai / admin123</p>
+<p class="text-xs text-center" style="color:var(--text2)">Admin: admin@hasanath.ai / admin123</p>
 </div>
 <div id="register-panel" style="display:none;flex-direction:column;gap:14px">
 <input type="text" class="input-field" id="reg-name" placeholder="Full name" autocomplete="name">
@@ -153,7 +153,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 <div class="p-6 border-b border-[rgba(212,168,83,0.12)]">
 <div class="flex items-center gap-3">
 <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#2D9B72] to-[#D4A853] flex items-center justify-center"><i class="fas fa-moon text-[#070E0B] text-sm"></i></div>
-<div><h1 class="text-lg font-bold" style="color:var(--gold)">Hasanah AI</h1><p class="text-[10px] tracking-widest uppercase" style="color:var(--text2)">Islamic & Academic</p></div>
+<div><h1 class="text-lg font-bold" style="color:var(--gold)">Hasanath AI</h1><p class="text-[10px] tracking-widest uppercase" style="color:var(--text2)">Islamic & Academic</p></div>
 </div>
 </div>
 <nav class="flex-1 py-4 overflow-y-auto">
@@ -186,7 +186,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 <!-- Dashboard -->
 <section id="page-dashboard" class="page active">
 <div class="max-w-6xl mx-auto">
-<div class="mb-8"><p class="text-sm mb-1" style="color:var(--text2)">Assalamu Alaikum</p><h2 class="text-3xl font-bold mb-1" id="greeting-text">Welcome to <span style="color:var(--gold)">Hasanah AI</span></h2><p class="text-sm" style="color:var(--text2)" id="dashboard-date"></p></div>
+<div class="mb-8"><p class="text-sm mb-1" style="color:var(--text2)">Assalamu Alaikum</p><h2 class="text-3xl font-bold mb-1" id="greeting-text">Welcome to <span style="color:var(--gold)">Hasanath AI</span></h2><p class="text-sm" style="color:var(--text2)" id="dashboard-date"></p></div>
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
 <div class="card stat-card"><div class="flex items-center gap-3 mb-3"><div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background:rgba(45,155,114,0.15)"><i class="fas fa-mosque" style="color:var(--emerald)"></i></div><p class="text-xs font-medium" style="color:var(--text2)">Next Prayer</p></div><p class="text-2xl font-bold" id="next-prayer-name">--</p><p class="text-xs mt-1" style="color:var(--gold)" id="next-prayer-time">--</p></div>
 <div class="card stat-card"><div class="flex items-center gap-3 mb-3"><div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background:var(--gold-dim)"><i class="fas fa-book-open" style="color:var(--gold)"></i></div><p class="text-xs font-medium" style="color:var(--text2)">Study Streak</p></div><p class="text-2xl font-bold" id="study-streak">0 days</p><p class="text-xs mt-1" style="color:var(--emerald-light)">Keep it up!</p></div>
@@ -274,16 +274,16 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 // ============================================
 // AUTHENTICATION SYSTEM
 // ============================================
-function simpleHash(str){var hash=0;var s=str+'hasanah_salt_2024_secure';for(var i=0;i<s.length;i++){hash=((hash<<5)-hash)+s.charCodeAt(i);hash=hash&hash}return 'h_'+Math.abs(hash).toString(16)+'_'+s.length.toString(16)}
+function simpleHash(str){var hash=0;var s=str+'hasanath_salt_2024_secure';for(var i=0;i<s.length;i++){hash=((hash<<5)-hash)+s.charCodeAt(i);hash=hash&hash}return 'h_'+Math.abs(hash).toString(16)+'_'+s.length.toString(16)}
 
-function getLoginAttempts(){try{return JSON.parse(localStorage.getItem('hasanah_loginAttempts')||'{"count":0,"lockedUntil":0}')}catch(e){return{count:0,lockedUntil:0}}}
-function recordFailedAttempt(){var d=getLoginAttempts();d.count+=1;if(d.count>=5){d.lockedUntil=Date.now()+300000;d.count=0}localStorage.setItem('hasanah_loginAttempts',JSON.stringify(d))}
-function clearLoginAttempts(){localStorage.removeItem('hasanah_loginAttempts')}
+function getLoginAttempts(){try{return JSON.parse(localStorage.getItem('hasanath_loginAttempts')||'{"count":0,"lockedUntil":0}')}catch(e){return{count:0,lockedUntil:0}}}
+function recordFailedAttempt(){var d=getLoginAttempts();d.count+=1;if(d.count>=5){d.lockedUntil=Date.now()+300000;d.count=0}localStorage.setItem('hasanath_loginAttempts',JSON.stringify(d))}
+function clearLoginAttempts(){localStorage.removeItem('hasanath_loginAttempts')}
 function isAccountLocked(){var d=getLoginAttempts();if(d.lockedUntil&&Date.now()<d.lockedUntil)return Math.ceil((d.lockedUntil-Date.now())/60000);if(d.lockedUntil&&Date.now()>=d.lockedUntil)clearLoginAttempts();return 0}
 
 var SESSION_DURATION=86400000;
-function createSession(u){var s={userId:u.id,name:u.name,email:u.email,role:u.role,createdAt:Date.now(),expiresAt:Date.now()+SESSION_DURATION};localStorage.setItem('hasanah_session',JSON.stringify(s));return s}
-function getValidSession(){try{var s=JSON.parse(localStorage.getItem('hasanah_session'));if(!s)return null;if(Date.now()>s.expiresAt){localStorage.removeItem('hasanah_session');return null}return s}catch(e){return null}}
+function createSession(u){var s={userId:u.id,name:u.name,email:u.email,role:u.role,createdAt:Date.now(),expiresAt:Date.now()+SESSION_DURATION};localStorage.setItem('hasanath_session',JSON.stringify(s));return s}
+function getValidSession(){try{var s=JSON.parse(localStorage.getItem('hasanath_session'));if(!s)return null;if(Date.now()>s.expiresAt){localStorage.removeItem('hasanath_session');return null}return s}catch(e){return null}}
 
 function checkPasswordStrength(pwd){var fill=document.getElementById('pwd-fill'),label=document.getElementById('pwd-label');if(!fill||!label)return;var s=0;if(pwd.length>=8)s++;if(pwd.length>=12)s++;if(/[A-Z]/.test(pwd))s++;if(/[0-9]/.test(pwd))s++;if(/[^A-Za-z0-9]/.test(pwd))s++;var l=[{w:'0%',c:'var(--bg)',t:''},{w:'20%',c:'var(--danger)',t:'Very Weak'},{w:'40%',c:'#E8976A',t:'Weak'},{w:'60%',c:'var(--gold)',t:'Fair'},{w:'80%',c:'var(--emerald)',t:'Strong'},{w:'100%',c:'var(--success)',t:'Very Strong'}];var v=l[s]||l[0];fill.style.width=v.w;fill.style.background=v.c;label.textContent=v.t;label.style.color=v.c}
 
@@ -292,12 +292,12 @@ function showAuthError(m){var e=document.getElementById('auth-error');e.textCont
 
 function initAuth(){
   // Reset old incompatible auth data
-  var av=localStorage.getItem('hasanah_auth_version');
-  if(av!=='v3'){localStorage.removeItem('hasanah_users');localStorage.removeItem('hasanah_session');localStorage.removeItem('hasanah_loginAttempts');localStorage.setItem('hasanah_auth_version','v3')}
+  var av=localStorage.getItem('hasanath_auth_version');
+  if(av!=='v3'){localStorage.removeItem('hasanath_users');localStorage.removeItem('hasanath_session');localStorage.removeItem('hasanath_loginAttempts');localStorage.setItem('hasanath_auth_version','v3')}
   
-  var users=[];try{users=JSON.parse(localStorage.getItem('hasanah_users')||'[]')}catch(e){users=[]}
-  var adminExists=false;for(var i=0;i<users.length;i++){if(users[i].email==='admin@hasanah.ai'){adminExists=true;break}}
-  if(!adminExists){users.push({id:'admin-local',name:'Admin',email:'admin@hasanah.ai',passwordHash:simpleHash('admin123'),role:'admin',createdAt:new Date().toISOString()});localStorage.setItem('hasanah_users',JSON.stringify(users))}
+  var users=[];try{users=JSON.parse(localStorage.getItem('hasanath_users')||'[]')}catch(e){users=[]}
+  var adminExists=false;for(var i=0;i<users.length;i++){if(users[i].email==='admin@hasanath.ai'){adminExists=true;break}}
+  if(!adminExists){users.push({id:'admin-local',name:'Admin',email:'admin@hasanath.ai',passwordHash:simpleHash('admin123'),role:'admin',createdAt:new Date().toISOString()});localStorage.setItem('hasanath_users',JSON.stringify(users))}
 
   // Tab handlers
   document.getElementById('tab-login').addEventListener('click',function(){this.classList.add('active');document.getElementById('tab-register').classList.remove('active');document.getElementById('login-panel').style.display='flex';document.getElementById('register-panel').style.display='none';hideAuthMessages()});
@@ -322,7 +322,7 @@ function handleLogin(){
   var btn=document.getElementById('login-btn');btn.disabled=true;btn.textContent='Verifying...';
   setTimeout(function(){
     try{
-      var inputHash=simpleHash(password),users=[];try{users=JSON.parse(localStorage.getItem('hasanah_users')||'[]')}catch(e){users=[]}
+      var inputHash=simpleHash(password),users=[];try{users=JSON.parse(localStorage.getItem('hasanath_users')||'[]')}catch(e){users=[]}
       var matched=null;for(var i=0;i<users.length;i++){if(users[i].email===email&&users[i].passwordHash===inputHash){matched=users[i];break}}
       if(matched){clearLoginAttempts();var session=createSession(matched);showApp(session);showToast('Welcome back, '+matched.name+'!','success')}
       else{recordFailedAttempt();var att=getLoginAttempts(),rem=5-att.count;showAuthError('Invalid email or password. '+rem+' attempt'+(rem!==1?'s':'')+' remaining.')}
@@ -343,17 +343,17 @@ function handleRegister(){
   var btn=document.getElementById('reg-btn');btn.disabled=true;btn.textContent='Creating...';
   setTimeout(function(){
     try{
-      var users=[];try{users=JSON.parse(localStorage.getItem('hasanah_users')||'[]')}catch(e){users=[]}
+      var users=[];try{users=JSON.parse(localStorage.getItem('hasanath_users')||'[]')}catch(e){users=[]}
       for(var i=0;i<users.length;i++){if(users[i].email===email){showAuthError('An account with this email already exists.');btn.disabled=false;btn.textContent='Create Account';return}}
       var newUser={id:'user-'+Date.now(),name:name,email:email,passwordHash:simpleHash(password),role:'student',createdAt:new Date().toISOString()};
-      users.push(newUser);localStorage.setItem('hasanah_users',JSON.stringify(users));
+      users.push(newUser);localStorage.setItem('hasanath_users',JSON.stringify(users));
       var session=createSession(newUser);showApp(session);showToast('Account created! Welcome, '+name,'success')
     }catch(err){showAuthError('Registration error: '+err.message)}
     btn.disabled=false;btn.textContent='Create Account'
   },100)
 }
 
-function handleLogout(){localStorage.removeItem('hasanah_session');showAuth();showToast('Logged out successfully','info')}
+function handleLogout(){localStorage.removeItem('hasanath_session');showAuth();showToast('Logged out successfully','info')}
 
 function showApp(user){
   var o=document.getElementById('auth-overlay');if(o){o.style.opacity='0';o.style.pointerEvents='none'}
@@ -481,18 +481,18 @@ var dailyAyahs=[
 // APP STATE
 // ============================================
 var appState={currentPage:'dashboard',studySessions:[],assignments:[],quizScores:[],arabicProgress:{},streak:0,lastStudyDate:'',currentCardIndex:0,arabicFilter:'all',filteredVocab:arabicVocab.slice(),quizState:null,assignmentFilter:'all',prayerTimes:null,userLat:25.0,userLng:55.0,userCity:'Dubai'};
-try{appState.studySessions=JSON.parse(localStorage.getItem('hasanah_sessions')||'[]')}catch(e){}
-try{appState.assignments=JSON.parse(localStorage.getItem('hasanah_assignments')||'[]')}catch(e){}
-try{appState.quizScores=JSON.parse(localStorage.getItem('hasanah_quizscores')||'[]')}catch(e){}
-try{appState.arabicProgress=JSON.parse(localStorage.getItem('hasanah_arabic')||'{}')}catch(e){}
-try{appState.streak=parseInt(localStorage.getItem('hasanah_streak')||'0')}catch(e){}
-try{appState.lastStudyDate=localStorage.getItem('hasanah_laststudy')||''}catch(e){}
+try{appState.studySessions=JSON.parse(localStorage.getItem('hasanath_sessions')||'[]')}catch(e){}
+try{appState.assignments=JSON.parse(localStorage.getItem('hasanath_assignments')||'[]')}catch(e){}
+try{appState.quizScores=JSON.parse(localStorage.getItem('hasanath_quizscores')||'[]')}catch(e){}
+try{appState.arabicProgress=JSON.parse(localStorage.getItem('hasanath_arabic')||'{}')}catch(e){}
+try{appState.streak=parseInt(localStorage.getItem('hasanath_streak')||'0')}catch(e){}
+try{appState.lastStudyDate=localStorage.getItem('hasanath_laststudy')||''}catch(e){}
 
 // ============================================
 // UTILITY
 // ============================================
 function showToast(m,t){t=t||'info';var c=document.getElementById('toast-container');if(!c)return;var d=document.createElement('div');d.className='toast toast-'+t;var ic={success:'fa-check-circle',info:'fa-info-circle',warning:'fa-exclamation-triangle'};d.innerHTML='<i class="fas '+(ic[t]||ic.info)+'"></i>'+m;c.appendChild(d);setTimeout(function(){d.style.opacity='0';d.style.transform='translateX(40px)';setTimeout(function(){if(d.parentNode)d.parentNode.removeChild(d)},300)},3000)}
-function saveState(){try{localStorage.setItem('hasanah_sessions',JSON.stringify(appState.studySessions));localStorage.setItem('hasanah_assignments',JSON.stringify(appState.assignments));localStorage.setItem('hasanah_quizscores',JSON.stringify(appState.quizScores));localStorage.setItem('hasanah_arabic',JSON.stringify(appState.arabicProgress));localStorage.setItem('hasanah_streak',appState.streak.toString());localStorage.setItem('hasanah_laststudy',appState.lastStudyDate)}catch(e){}}
+function saveState(){try{localStorage.setItem('hasanath_sessions',JSON.stringify(appState.studySessions));localStorage.setItem('hasanath_assignments',JSON.stringify(appState.assignments));localStorage.setItem('hasanath_quizscores',JSON.stringify(appState.quizScores));localStorage.setItem('hasanath_arabic',JSON.stringify(appState.arabicProgress));localStorage.setItem('hasanath_streak',appState.streak.toString());localStorage.setItem('hasanath_laststudy',appState.lastStudyDate)}catch(e){}}
 function formatDate(d){return new Date(d).toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'})}
 function formatTime12(h){var hrs=Math.floor(h),mins=Math.round((h-hrs)*60),p=hrs>=12?'PM':'AM',h12=hrs>12?hrs-12:(hrs===0?12:hrs);return h12+':'+(mins<10?'0':'')+mins+' '+p}
 function escapeHtml(t){var d=document.createElement('div');d.textContent=t;return d.innerHTML}
@@ -514,7 +514,7 @@ function showTypingIndicator(){var c=document.getElementById('chat-container');i
 function removeTypingIndicator(id){var e=document.getElementById(id);if(e&&e.parentNode)e.parentNode.removeChild(e);var c=document.getElementById('chat-container');if(c)c.scrollTop=c.scrollHeight}
 function formatAIResponse(t){if(!t)return'';return t.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>')}
 
-async function sendQuestion(){var input=document.getElementById('qa-input');if(!input)return;var q=input.value.trim();if(!q)return;input.value='';addChatMessage(escapeHtml(q),true);var typingId=showTypingIndicator();var answer="";if(GROQ_API_KEY&&GROQ_API_KEY.length>10){var models=['llama-3.1-8b-instant','llama3-8b-8192','llama-3.3-70b-versatile'];var success=false;for(var m=0;m<models.length;m++){try{var response=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+GROQ_API_KEY},body:JSON.stringify({model:models[m],messages:[{role:'system',content:'You are Hasanah AI, a knowledgeable and respectful Islamic learning assistant. Provide accurate answers based on the Quran and authentic Hadith. If unsure, say so politely. Keep answers concise and well-formatted. Use bullet points or bold text where helpful.'},{role:'user',content:q}],temperature:0.3,max_tokens:800})});if(!response.ok){if(response.status===400||response.status===404)continue;if(response.status===401||response.status===403)throw new Error('Invalid API Key');throw new Error('API Error '+response.status)}var data=await response.json();if(data.choices&&data.choices[0]&&data.choices[0].message){answer=data.choices[0].message.content;success=true;break}}catch(error){if(m===models.length-1||error.message.indexOf('Invalid API Key')!==-1){answer=findLocalAnswer(q);answer+='<br><br><p style="font-size:11px;color:var(--danger)"><i>AI Error: '+escapeHtml(error.message)+'. Offline answer.</i></p>'}}}if(!success&&!answer){answer=findLocalAnswer(q);answer+='<br><br><p style="font-size:11px;color:var(--danger)"><i>AI unavailable. Offline answer.</i></p>'}}else{answer=findLocalAnswer(q);answer+='<br><br><p style="font-size:11px;color:var(--text2)"><i>Running in offline mode.</i></p>'}removeTypingIndicator(typingId);addChatMessage(formatAIResponse(answer),false)}
+async function sendQuestion(){var input=document.getElementById('qa-input');if(!input)return;var q=input.value.trim();if(!q)return;input.value='';addChatMessage(escapeHtml(q),true);var typingId=showTypingIndicator();var answer="";if(GROQ_API_KEY&&GROQ_API_KEY.length>10){var models=['llama-3.1-8b-instant','llama3-8b-8192','llama-3.3-70b-versatile'];var success=false;for(var m=0;m<models.length;m++){try{var response=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+GROQ_API_KEY},body:JSON.stringify({model:models[m],messages:[{role:'system',content:'You are Hasanath AI, a knowledgeable and respectful Islamic learning assistant. Provide accurate answers based on the Quran and authentic Hadith. If unsure, say so politely. Keep answers concise and well-formatted. Use bullet points or bold text where helpful.'},{role:'user',content:q}],temperature:0.3,max_tokens:800})});if(!response.ok){if(response.status===400||response.status===404)continue;if(response.status===401||response.status===403)throw new Error('Invalid API Key');throw new Error('API Error '+response.status)}var data=await response.json();if(data.choices&&data.choices[0]&&data.choices[0].message){answer=data.choices[0].message.content;success=true;break}}catch(error){if(m===models.length-1||error.message.indexOf('Invalid API Key')!==-1){answer=findLocalAnswer(q);answer+='<br><br><p style="font-size:11px;color:var(--danger)"><i>AI Error: '+escapeHtml(error.message)+'. Offline answer.</i></p>'}}}if(!success&&!answer){answer=findLocalAnswer(q);answer+='<br><br><p style="font-size:11px;color:var(--danger)"><i>AI unavailable. Offline answer.</i></p>'}}else{answer=findLocalAnswer(q);answer+='<br><br><p style="font-size:11px;color:var(--text2)"><i>Running in offline mode.</i></p>'}removeTypingIndicator(typingId);addChatMessage(formatAIResponse(answer),false)}
 
 function quickQuestion(q){var i=document.getElementById('qa-input');if(i)i.value=q;sendQuestion()}
 
